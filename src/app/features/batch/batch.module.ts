@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BatchComponent } from './batch.component';
+import { BatchService } from './batch.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +12,10 @@ import { BatchComponent } from './batch.component';
     BatchComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  providers: [BatchService]
 })
 export class BatchModule { }

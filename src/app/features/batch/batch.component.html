@@ -1,1 +1,111 @@
-<p>batch works!</p>
+<div class="container p-2 my-4">
+  <div class="d-flex flex-row justify-content-between">
+    <h3>Batches</h3>
+    <button type="button" class="btn btn-outline-dark btn-sm" (click)="openAddBatchModal(batchModal)">Add
+      Batch</button>
+  </div>
+  <div class="mt-4 d-flex flex-row justify-content-center">
+    <table class="table" *ngIf="batches.length">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">No. Of Years</th>
+          <th scope="col">Start Year</th>
+          <th scope="col">End Year</th>
+          <th scope="col">Code</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let batch of batches">
+          <tr>
+            <th scope="row">{{batch.id}}</th>
+            <td>{{batch.name}}</td>
+            <td>{{batch.no_of_years}}</td>
+            <td>{{batch.start_year}}</td>
+            <td>{{batch.end_year}}</td>
+            <td>{{batch.code}}</td>
+            <td class="d-flex flex-row">
+              <i class="bi bi-pencil-fill" (click)="openEditBatchModal(batch, batchModal)"></i>
+              <i class="bi bi-trash3-fill mx-4" (click)="openDeleteBatchModal(batch, deleteBatchModal)"></i>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <ng-container *ngIf="!batches.length" #no_batches_found>
+      <h5 class="mt-4 pt-4">
+        No Batches found.
+      </h5>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Add Batch Modal -->
+<ng-template #batchModal let-batchmodal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="batchModalLabel">Add Batch</h5>
+      <div class="fs-5" aria-label="Close" (click)="batchmodal.dismiss()">
+        <i class="bi bi-x-circle"></i>
+      </div>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="batchForm">
+        <div class="form-group">
+          <label for="batchName">Name</label>
+          <input id="batchName" type="text" class="form-control" placeholder="Name" aria-label="Name"
+            aria-describedby="basic-addon1" formControlName="name">
+        </div>
+        <div class="form-group mt-2">
+          <label for="batchNoOfYears">No of Years</label>
+          <input type="number" class="form-control" id="batchNoOfYears" placeholder="No of Years"
+            formControlName="no_of_years">
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+          <div class="form-group mt-2">
+            <label for="startYear">Start Year</label>
+            <input type="text" class="form-control" id="startYear" placeholder="Start Year"
+              formControlName="start_year">
+          </div>
+          <div class="form-group mt-2">
+            <label for="endYear">End Year</label>
+            <input type="text" class="form-control" id="endYear" placeholder="End Year" formControlName="end_year">
+          </div>
+        </div>
+        <div class="form-group mt-2">
+          <label for="batchCode">Code</label>
+          <input type="text" class="form-control" id="batchCode" placeholder="Code" disabled>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="batchmodal.dismiss()">Cancel</button>
+      <button type="button" class="btn btn-outline-dark btn-sm"
+        (click)="actionType  === 'add' ? createBatch() : updateBatch()">Save</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- Delete Batch Confirmation Modal -->
+<ng-template #deleteBatchModal let-deletebatchmodal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteBatchModalLabel">Confirmation</h5>
+      <div class="fs-5" aria-label="Close" (click)="deletebatchmodal.dismiss()">
+        <i class="bi bi-x-circle"></i>
+      </div>
+    </div>
+    <div class="modal-body">
+      <form>
+        Are you sure, you want to delete this batch?
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="deletebatchmodal.dismiss()">No</button>
+      <button type="button" class="btn btn-outline-dark btn-sm" (click)="deletebatchmodal.close()">Yes</button>
+    </div>
+  </div>
+</ng-template>

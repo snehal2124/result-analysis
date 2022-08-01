@@ -17,6 +17,6 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule
   ],
-  exports: [HeaderComponent, FooterComponent, SideBarComponent]
+  exports: [HeaderComponent, FooterComponent, SideBarComponent],
 })
 export class CoreModule { }

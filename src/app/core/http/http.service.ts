@@ -9,7 +9,7 @@ export class HttpService {
 
   constructor(private httpClient: HttpClient) { }
 
-  get(url: string, options: Object): Observable<any> {
+  get(url: string, options: Object = {} = {}): Observable<any> {
     return this.httpClient.get(url, options).pipe(
       map((httpResponse) => {
         return httpResponse || {};
@@ -21,7 +21,7 @@ export class HttpService {
     );
   }
 
-  post(url: string, body: any, options: Object): Observable<any> {
+  post(url: string, body: any, options: Object = {}): Observable<any> {
     return this.httpClient.post(url, body, options).pipe(
       map((httpResponse) => {
         return httpResponse || {};
@@ -33,7 +33,7 @@ export class HttpService {
     );
   }
 
-  patch(url: string, body: any, options: Object): Observable<any> {
+  patch(url: string, body: any, options: Object = {}): Observable<any> {
     return this.httpClient.patch(url, body, options).pipe(
       map((httpResponse) => {
         return httpResponse || {};
@@ -45,7 +45,7 @@ export class HttpService {
     );
   }
 
-  delete(url: string, options: Object): Observable<any> {
+  delete(url: string, options: Object = {}): Observable<any> {
     return this.httpClient.delete(url, options).pipe(
       map((httpResponse) => {
         return httpResponse || {};
