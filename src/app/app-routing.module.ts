@@ -11,6 +11,7 @@ const routes: Routes = [
   {
     path: 'batches',
     component: BatchComponent
+    // loadChildren: () => import('./features/batch/batch.module').then(m => m.BatchModule)
   }
 ];
 
