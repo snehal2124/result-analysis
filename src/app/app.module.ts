@@ -9,10 +9,22 @@ import { CoreModule } from './core/core.module';
 import { HttpService } from './core/http/http.service';
 import { BatchModule } from './features/batch/batch.module';
 import { SharedModule } from './shared/shared.module';
+import { SubjectsComponent } from './subjects/subjects.component';
+import { StudentsComponent } from './students/students.component';
+import { ResultComponent } from './result/result.component';
+
+
+
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SubjectsComponent,
+    StudentsComponent,
+    ResultComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -21,7 +33,8 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    BatchModule
+    BatchModule,
+    
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
