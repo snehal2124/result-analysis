@@ -8,15 +8,10 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpService } from './core/http/http.service';
 import { BatchModule } from './features/batch/batch.module';
+import { ResultComponent } from './features/result/result.component';
+import { StudentsComponent } from './features/students/students.component';
+import { SubjectsComponent } from './features/subjects/subjects.component';
 import { SharedModule } from './shared/shared.module';
-import { SubjectsComponent } from './subjects/subjects.component';
-import { StudentsComponent } from './students/students.component';
-import { ResultComponent } from './result/result.component';
-
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -24,7 +19,7 @@ import { ResultComponent } from './result/result.component';
     SubjectsComponent,
     StudentsComponent,
     ResultComponent,
-  
+
   ],
   imports: [
     BrowserModule,
@@ -34,7 +29,7 @@ import { ResultComponent } from './result/result.component';
     CoreModule,
     SharedModule,
     BatchModule,
-    
+
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
