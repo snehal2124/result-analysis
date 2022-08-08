@@ -18,6 +18,7 @@ const routes: Routes = [
   {
     path: 'subjects',
     component: SubjectsComponent
+    // loadChildren: () => import('./features/subjects/subjects.services').then(m=> m.SubjectServices)
     
   },
 ];
