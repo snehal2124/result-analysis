@@ -8,11 +8,11 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpService } from './core/http/http.service';
 import { BatchModule } from './features/batch/batch.module';
-import { SharedModule } from './shared/shared.module';
-import { SemesterComponent } from './features/semester/semester.component';
-import { SubjectsComponent } from './features/subjects/subjects.component';
 import { ResultComponent } from './features/result/result.component';
+import { SemesterComponent } from './features/semester/semester.component';
 import { StudentsComponent } from './features/students/students.component';
+import { SubjectsComponent } from './features/subjects/subjects.component';
+import { SharedModule } from './shared/shared.module';
 
 
 
@@ -25,9 +25,8 @@ import { StudentsComponent } from './features/students/students.component';
     AppComponent,
     SemesterComponent,
     SubjectsComponent,
-    ResultComponent,
     StudentsComponent,
-  
+    ResultComponent,
   
   ],
   imports: [
@@ -38,7 +37,7 @@ import { StudentsComponent } from './features/students/students.component';
     CoreModule,
     SharedModule,
     BatchModule,
-    
+
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
