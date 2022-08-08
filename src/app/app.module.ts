@@ -9,9 +9,11 @@ import { CoreModule } from './core/core.module';
 import { HttpService } from './core/http/http.service';
 import { BatchModule } from './features/batch/batch.module';
 import { SharedModule } from './shared/shared.module';
-import { SubjectsComponent } from './subjects/subjects.component';
-import { StudentsComponent } from './students/students.component';
-import { ResultComponent } from './result/result.component';
+import { SemesterComponent } from './features/semester/semester.component';
+import { SubjectsComponent } from './features/subjects/subjects.component';
+import { ResultComponent } from './features/result/result.component';
+import { StudentsComponent } from './features/students/students.component';
+
 
 
 
@@ -21,9 +23,11 @@ import { ResultComponent } from './result/result.component';
 @NgModule({
   declarations: [
     AppComponent,
+    SemesterComponent,
     SubjectsComponent,
-    StudentsComponent,
     ResultComponent,
+    StudentsComponent,
+  
   
   ],
   imports: [
