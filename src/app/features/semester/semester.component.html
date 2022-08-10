@@ -1,1 +1,92 @@
-<p>semester works!</p>
+<div class="container p-2 my-4">
+    <div class="d-flex flex-row justify-content-between">
+      <h3>Semesters</h3>
+      <button type="button" class="btn btn-outline-dark btn-sm" (click)="openAddSemesterModal(semesterModal)">Add
+        Semester</button>
+    </div>
+    <div class="mt-4 d-flex flex-row justify-content-center">
+      <div class="d-flex flex-column align-items-center w-100">
+        <table class="table" *ngIf="semesters.length">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Code</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let semester of semesters">
+              <tr>
+                <th scope="row">{{semester.id}}</th>
+                <td>{{semester.name}}</td>
+                <td>{{semester.code}}</td>
+                <td class="d-flex flex-row">
+                  <i class="bi bi-pencil-fill" (click)="openEditSemesterModal(semester, semesterModal)"></i>
+                  <i class="bi bi-trash3-fill mx-4" (click)="openDeleteSemesterModal(semester, deleteSemesterModal)"></i>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="semesters.length"></ngb-pagination>
+      </div>
+      <ng-container *ngIf="!semesters.length" #no_semesters_found>
+        <h5 class="mt-4 pt-4">
+          No Semesters found.
+        </h5>
+      </ng-container>
+    </div>
+  </div>
+  
+  <!-- Add Batch Modal -->
+  <ng-template #semesterModal let-semestermodal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="semesterModalLabel">Add Batch</h5>
+        <div class="fs-5" aria-label="Close" (click)="semestermodal.dismiss()">
+          <i class="bi bi-x-circle"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="semesterForm">
+          <div class="form-group">
+            <label for="semesterName">Name</label>
+            <input id="semesterName" type="text" class="form-control" placeholder="Name" aria-label="Name"
+              aria-describedby="basic-addon1" formControlName="name">
+          </div>
+          <div class="form-group mt-2">
+            <label for="semesterCode">Code</label>
+            <input type="text" class="form-control" id="semesterCode" placeholder="Code" disabled>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="semestermodal.dismiss()">Cancel</button>
+        <button type="button" class="btn btn-outline-dark btn-sm"
+          (click)="actionType  === 'add' ? createSemester() : updateSemester()">Save</button>
+      </div>
+    </div>
+  </ng-template>
+  
+  
+  <!-- Delete Batch Confirmation Modal -->
+  <ng-template #deleteSemesterModal let-deletesemestermodal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteSemesterModalLabel">Confirmation</h5>
+        <div class="fs-5" aria-label="Close" (click)="deletesemestermodal.dismiss()">
+          <i class="bi bi-x-circle"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form>
+          Are you sure, you want to delete this semester?
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="deletesemestermodal.dismiss()">No</button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="deletesemestermodal.close()">Yes</button>
+      </div>
+    </div>
+  </ng-template>

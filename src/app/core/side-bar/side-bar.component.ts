@@ -19,6 +19,18 @@ export class SideBarComponent implements OnInit {
     {
       name: "Subjects",
       route: "subjects"
+    },
+    {
+      name: "Semester",
+      route: "semester"
+    },
+    {
+      name: "Student",
+      route: "student"
+    },
+    {
+      name: "Staff",
+      route: "staff"
     }
   ]
 

@@ -1,0 +1,124 @@
+<div class="container p-2 my-4">
+    <div class="d-flex flex-row justify-content-between">
+      <h3>Students</h3>
+      <button type="button" class="btn btn-outline-dark btn-sm" (click)="openAddStudentModal(studentModal)">Add
+        Student</button>
+    </div>
+    <div class="mt-4 d-flex flex-row justify-content-center">
+      <div class="d-flex flex-column align-items-center w-100">
+        <table class="table" *ngIf="students.length">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col"> First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Roll no</th>
+              <th scope="col">Email</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Address</th>
+              <th></th>
+              <th scope="col">Actions</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let student of students">
+              <tr>
+                <th scope="row">{{student.id}}</th>
+                <td>{{student.name}}</td>
+                <td>{{student.lastName}}</td>
+                <td>{{student.rollNo}}</td>
+                <td>{{student.email}}</td>
+                <td>{{student.mobile}}</td>
+                <td>{{student.address}}</td>
+                <td>{{student.code}}</td>
+                <td class="d-flex flex-row">
+                  <i class="bi bi-pencil-fill" (click)="openEditStudentModal(student, studentModal)"></i>
+                  <i class="bi bi-trash3-fill mx-4" (click)="openDeleteStudentModal(student, deleteStudentModal)"></i>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="students.length"></ngb-pagination>
+      </div>
+      <ng-container *ngIf="!students.length" #no_students_found>
+        <h5 class="mt-4 pt-4">
+          No Students found.
+        </h5>
+      </ng-container>
+    </div>
+  </div>
+  
+  <!-- Add Batch Modal -->
+  <ng-template #studentModal let-studentmodal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="studentModalLabel">Add Student</h5>
+        <div class="fs-5" aria-label="Close" (click)="studentmodal.dismiss()">
+          <i class="bi bi-x-circle"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="studentForm">
+          <div class="form-group">
+            <label for="studentName">First Name</label>
+            <input id="studentName" type="text" class="form-control" placeholder="Name" aria-label="Name"
+              aria-describedby="basic-addon1" formControlName="name">
+          </div>
+          <div class="form-group mt-2">
+            <label for="studentLastName">Last Name</label>
+            <input type="number" class="form-control" id="lastName" placeholder="last name"
+              formControlName="last_name">
+          </div>
+          <div class="d-flex flex-row justify-content-between">
+            <div class="form-group mt-2">
+              <label for="rollNo">Roll no</label>
+              <input type="text" class="form-control" id="rollNo" placeholder="roll_no"
+                formControlName="roll_no">
+            </div>
+            <div class="form-group mt-2">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="email" formControlName="email">
+            </div>
+          </div>
+          <div class="form-group mt-2">
+            <label for="studentMobile">Mobile</label>
+            <input type="text" class="form-control" id="studentMobile" placeholder="mobile" formControlName="mobile">
+          </div>
+          <div class="form-group mt-2">
+            <label for="studentAddress">Address</label>
+            <input type="text" class="form-control" id="studentAddress" placeholder="address" formControlName="address">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="studentmodal.dismiss()">Cancel</button>
+        <button type="button" class="btn btn-outline-dark btn-sm"
+          (click)="actionType  === 'add' ? createStudent() : updateStudent()">Save</button>
+      </div>
+    </div>
+  </ng-template>
+  
+  
+  <!-- Delete Batch Confirmation Modal -->
+  <ng-template #deleteStudentModal let-deletestudentmodal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteStudentModalLabel">Confirmation</h5>
+        <div class="fs-5" aria-label="Close" (click)="deletestudentmodal.dismiss()">
+          <i class="bi bi-x-circle"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form>
+          Are you sure, you want to delete this student?
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="deletestudentmodal.dismiss()">No</button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="deletestudentmodal.close()">Yes</button>
+      </div>
+    </div>
+  </ng-template>
+  
