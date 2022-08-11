@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { BatchComponent } from './features/batch/batch.component';
 import { SpecializationComponent } from './features/specialization/specialization.component';
 import { SemesterComponent } from './features/semester/semester.component';
-import { StudentComponent } from './features/student/student.component';
 import { StaffComponent } from './features/staff/staff.component';
 import { ResultComponent } from './features/result/result.component';
 
