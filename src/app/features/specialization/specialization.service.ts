@@ -3,6 +3,7 @@ import { of } from 'rxjs';
 import { HttpService } from 'src/app/core/http/http.service';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +14,7 @@ export class SpecializationService {
   getSpecializations() {
     return of([
       {
+    
         id: '1',
         name: '1',
         no_of_years: '4',
@@ -51,6 +53,7 @@ export class SpecializationService {
   getSpecialization() {
     // return this.httpService.get('sdsad');
     return of({
+      
       id: '6',
       name: '6',
       no_of_years: '4',

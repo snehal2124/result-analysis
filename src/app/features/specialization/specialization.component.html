@@ -1,85 +1,93 @@
 <div class="container p-2 my-4">
   <div class="d-flex flex-row justify-content-between">
     <h3>Specializations</h3>
-    <button type="button" class="btn btn-outline-dark btn-sm" (click)="openAddSpecializationModal(specializationModal)">Add
+    <button type="button" class="btn btn-outline-dark btn-sm"
+      (click)="openAddSpecializationModal(specializationModal)">Add
       Specialization</button>
   </div>
   <div class="mt-4 d-flex flex-row justify-content-center">
-    <div class="d-flex flex-column align-items-center w-100">
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">No.Of Years</th>
-      <th scope="col">No.Of Sems</th>
-      <th scope="col">Code</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngFor="let specialization of specializations">
-      <tr>
-        <th scope="row">{{specialization.id}}</th>
-        <td>{{specialization.name}}</td>
-        <td>{{specialization.no_of_years}}</td>
-        <td>{{specialization.no_of_sems}}</td>
-        <td>{{specialization.code}}</td>
-        <td class="d-flex flex-row">
-          <i class="bi bi-pencil-fill" (click)="openEditSpecializationModal(specialization, specializationModal)"></i>
-          <i class="bi bi-trash3-fill mx-4" (click)="openDeleteSpecializationModal(specialization, deleteSpecializationModal)"></i>
-        </td>
-      </tr>
-    </ng-container>
-    </tbody>
-</table>
-<ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="specializations.length"></ngb-pagination>
+    <div class="d-flex flex-column align-items-center w-100" *ngIf="specializations.length; else no_specializations_found">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">No.Of Years</th>
+            <th scope="col">No.Of Sems</th>
+            <th scope="col">Code</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let specialization of specializations | slice: (page-1) * pageSize : page * pageSize">
+            <tr>
+              <th scope="row">{{specialization.id}} - {{page * pageSize}} - {{(page-1) * pageSize}}</th>
+              <td>{{specialization.name}}</td>
+              <td>{{specialization.no_of_years}}</td>
+              <td>{{specialization.no_of_sems}}</td>
+              <td>{{specialization.code}}</td>
+              <td class="d-flex flex-row">
+                <i class="bi bi-pencil-fill"
+                  (click)="openEditSpecializationModal(specialization, specializationModal)"></i>
+                <i class="bi bi-trash3-fill mx-4"
+                  (click)="openDeleteSpecializationModal(specialization, deleteSpecializationModal)"></i>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="specializations.length"></ngb-pagination>
     </div>
-    <ng-container *ngIf="!specializations.length" #no_specializations_found>
+    <ng-template #no_specializations_found>
       <h5 class="mt-4 pt-4">
         No Specializations found.
       </h5>
-    </ng-container>
+    </ng-template>
   </div>
 </div>
 
 
 
+
 <!-- Modal -->
 <ng-template #specializationModal let-specializationmodal>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="specializationModalLabel">Add Specialization</h5>
-        <div class="fs-5" aria-label="Close" (click)="specializationmodal.dismiss()">
-          <i class="bi bi-x-circle"></i>
-        </div>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="specializationForm">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Name</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="name">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">No Of Years</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" formControlName="no_of_years">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">No Of Sems</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" formControlName="no_of_sems">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">code</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" disabled>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="specializationmodal.dismiss()">Cancel</button>
-        <button type="button" class="btn btn-outline-dark btn-sm"
-          (click)="actionType  === 'add' ? createSpecialization() : updateSpecialization()">Save</button>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="specializationModalLabel">{{actionType === 'add' ? 'Add' : 'Edit'}} Specialization</h5>
+
+      <div class="fs-5" aria-label="Close" (click)="specializationmodal.dismiss()">
+        <i class="bi bi-x-circle"></i>
       </div>
     </div>
+    <div class="modal-body">
+      <form [formGroup]="specializationForm">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            formControlName="name">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">No Of Years</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" formControlName="no_of_years">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">No Of Sems</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" formControlName="no_of_sems">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">code</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-sm"
+        (click)="specializationmodal.dismiss()">Cancel</button>
+      <button type="button" class="btn btn-outline-dark btn-sm"
+        (click)="actionType  === 'add' ? createSpecialization() : updateSpecialization()">Save</button>
+    </div>
+  </div>
 </ng-template>
 
 
@@ -98,10 +106,9 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="deletespecializationmodal.dismiss()">No</button>
+      <button type="button" class="btn btn-outline-secondary btn-sm"
+        (click)="deletespecializationmodal.dismiss()">No</button>
       <button type="button" class="btn btn-outline-dark btn-sm" (click)="deletespecializationmodal.close()">Yes</button>
     </div>
   </div>
 </ng-template>
-
-

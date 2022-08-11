@@ -17,5 +17,4 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   providers: [SpecializationService]
 })
 export class SpecializationModule { 
-
 }

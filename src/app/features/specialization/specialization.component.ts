@@ -4,18 +4,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SpecializationService } from './specialization.service';
 
 
-
 @Component({
   selector: 'app-specialization',
   templateUrl: './specialization.component.html',
   styleUrls: ['./specialization.component.css']
 })
 export class SpecializationComponent implements OnInit {
-  
   specializations: any[] = [];
   specializationForm : FormGroup = this.formBuilder.group({});
 
-  page = 1;
+  page = 4;
   pageSize = 2;
 
   actionType: string = '';
@@ -36,6 +34,7 @@ export class SpecializationComponent implements OnInit {
     });
     this.getSpecializations();
   }
+
   getSpecializations() {
     this.specializationService.getSpecializations().subscribe((val) => {
       this.specializations = val;
