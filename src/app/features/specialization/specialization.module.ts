@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SpecializationComponent } from './specialization.component';
 import { SpecializationService } from './specialization.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule, } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SpecializationComponent } from './specialization.component';
 
 @NgModule({
   declarations: [
@@ -17,4 +17,5 @@ import { NgbModule, } from '@ng-bootstrap/ng-bootstrap';
   ],
   providers: [SpecializationService]
 })
-export class SpecializationModule { }
+export class SpecializationModule { 
+}

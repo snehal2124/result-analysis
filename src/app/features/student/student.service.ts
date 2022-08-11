@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { HttpService } from 'src/app/core/http/http.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,45 +15,48 @@ export class StudentService {
     return of([
       {
         id: '1',
-        name:"student_name",
-        roll_no:'1',
-        email:'email',
-        mobile:'mob_no',
-        address:'address',
+        name: 'xxx',
+        lastName: 'xyz',
+        rollNo: '22',
+        email: 'namrata@gmail.com',
+        mobile: '99999999999',
+        address: 'nipani' 
       },
       {
         id: '2',
-        name:"student_name",
-        roll_no:'2',
-        email:'email',
-        mobile:'mob_no',
-        address:'address',
-        
+        name: 'xxx',
+        lastName: 'xyz',
+        rollNo: '22',
+        email: 'namrata@gmail.com',
+        mobile: '99999999999',
+        address: 'nipani'
       },
       {
         id: '3',
-        name:"student_name",
-        roll_no:'3',
-        email:'email',
-        mobile:'mob_no',
-        address:'address',
-       
+        name: 'xxx',
+        lastName: 'xyz',
+        rollNo: '22',
+        email: 'namrata@gmail.com',
+        mobile: '99999999999',
+        address: 'nipani'
       },
       {
-        id: '4',
-        name:"student_name",
-        roll_no:'4',
-        email:'email',
-        mobile:'mob_no',
-        address:'address',
-       
-      }, {
         id: '5',
-        name:"student_name",
-        roll_no:'5',
-        email:'email',
-        mobile:'mob_no',
-        address:'address',
+        name: 'xxx',
+        lastName: 'xyz',
+        rollNo: '22',
+        email: 'namrata@gmail.com',
+        mobile: '99999999999',
+        address: 'nipani'
+      },
+       {
+        id: '6',
+        name: 'xxx',
+        lastName: 'xyz',
+        rollNo: '22',
+        email: 'namrata@gmail.com',
+        mobile: '99999999999',
+        address: 'nipani'
         
       }
     ])
@@ -61,13 +65,12 @@ export class StudentService {
   getStudent() {
     // return this.httpService.get('sdsad');
     return of({
-      id: '1',
-      name:"student_name",
-      roll_no:'1',
-      email:'email',
-      mobile:'mob_no',
-      address:'address'
-     
+      id: '6',
+      name: 'xxx',
+      lastName: 'xyz',
+      email: 'namrata@gmail.com',
+      mabile: '99999999999',
+      address: 'nipani'
     })
   }
 

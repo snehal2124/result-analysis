@@ -1,6 +1,7 @@
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -9,28 +10,25 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpService } from './core/http/http.service';
 import { BatchModule } from './features/batch/batch.module';
-import { SemesterComponent } from './features/semester/semester.component';
+import { StaffModule } from './features/staff/staff.module';
 
-import { SubjectComponent } from './features/subject/subject.component';
+import { SemesterModule } from './features/semester/semester.module';
+import { StudentModule } from './features/student/student.module';
+
 import { SharedModule } from './shared/shared.module';
-import { ResultComponent } from './features/result/result.component';
+import { SpecializationComponent } from './features/specialization/specialization.component';
+import { SpecializationModule } from './features/specialization/specialization.module';
 import { StudentComponent } from './features/student/student.component';
-
-
-
-
-
+import { StaffComponent } from './features/staff/staff.component';
+import { ResultComponent } from './features/result/result.component';
+import { SemesterComponent } from './features/semester/semester.component';
+import { SubjectsComponent } from './features/subjects/subjects.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SemesterComponent,
-    SubjectComponent,
-    ResultComponent,
-    StudentComponent,
-    
-  
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +38,11 @@ import { StudentComponent } from './features/student/student.component';
     CoreModule,
     SharedModule,
     BatchModule,
-    
-    
-
+    StaffModule,
+    StudentModule,
+    SemesterModule,
+    SpecializationModule,
+    ReactiveFormsModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

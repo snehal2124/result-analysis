@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StudentService } from './student.service';
 
+
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -26,12 +27,13 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.studentForm = this.formBuilder.group({
-      id_pk: new FormControl(''),
-       name: new FormControl('', Validators.required),
-       roll_no: new FormControl(''),
-      email: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
+      id: new FormControl(''),
+      name: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      rollNo: new FormControl('', Validators.required),
       mobile: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
-      adress: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
+      address: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
     });
     this.getStudents();
   }
@@ -44,7 +46,7 @@ export class StudentComponent implements OnInit {
 
   openAddStudentModal(content: any) {
     this.studentForm.reset();
-    this.actionType = 'add';
+    this.actionType = 'edit';
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       console.log(`Closed with: ${result}`);
     }, (reason) => {
@@ -94,3 +96,5 @@ export class StudentComponent implements OnInit {
 
 }
 
+
+ 

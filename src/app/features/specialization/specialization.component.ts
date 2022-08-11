@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SpecializationService } from './specialization.service';
+
 
 @Component({
   selector: 'app-specialization',
@@ -9,9 +10,8 @@ import { SpecializationService } from './specialization.service';
   styleUrls: ['./specialization.component.css']
 })
 export class SpecializationComponent implements OnInit {
-
   specializations: any[] = [];
-  specializationForm: FormGroup = this.formBuilder.group({});
+  specializationForm : FormGroup = this.formBuilder.group({});
 
   page = 1;
   pageSize = 2;
@@ -25,16 +25,16 @@ export class SpecializationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.specializationForm = this.formBuilder.group({
+    this.specializationForm= this.formBuilder.group({
       id: new FormControl(''),
       code: new FormControl(''),
       name: new FormControl('', Validators.required),
       no_of_years: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
-      start_year: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
-      end_year: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
+      no_of_sems: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
     });
     this.getSpecializations();
   }
+
   getSpecializations() {
     this.specializationService.getSpecializations().subscribe((val) => {
       this.specializations = val;
@@ -59,9 +59,9 @@ export class SpecializationComponent implements OnInit {
     });
   }
 
-  openEditSpecializationModal(batch: any, content: any) {
+  openEditSpecializationModal(specialization: any, content: any) {
     this.actionType = 'edit';
-    this.specializationForm.setValue(batch);
+    this.specializationForm.setValue(specialization);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       console.log(`Closed with: ${result}`);
     }, (reason) => {
@@ -76,4 +76,19 @@ export class SpecializationComponent implements OnInit {
       this.getSpecializations();
     });
   }
+
+  openDeleteSpecializationModal(specialization: any, content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.deleteSpecialization(specialization);
+    }, (reason) => {
+      console.log(`Dismissed`);
+    });
+  }
+
+  deleteSpecialization(specialization: any) {
+    this.specializationService.deleteSpecialization(specialization.id).subscribe((val) => {
+      this.getSpecializations()
+    });
+  }
 }
+

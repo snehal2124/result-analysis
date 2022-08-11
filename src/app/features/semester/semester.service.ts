@@ -2,85 +2,66 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { HttpService } from 'src/app/core/http/http.service';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
-export class SpecializationService {
+export class SemesterService {
 
   constructor(private httpService: HttpService) { }
 
-  getSpecializations() {
+  getSemesters() {
+    // return this.httpService.get('url');
     return of([
       {
-    
         id: '1',
         name: '1',
-        no_of_years: '4',
-        no_of_sems: 1,
         code: '2016-2022'
       },
       {
         id: '2',
         name: '2',
-        no_of_years: '4',
-        no_of_sems: 2,
         code: '2016-2022'
       },
       {
         id: '3',
         name: '3',
-        no_of_years: '4',
-        no_of_sems: 3,
         code: '2016-2022'
       },
       {
         id: '5',
         name: '5',
-        no_of_years: '4',
-        no_of_sems: 4,
         code: '2016-2022'
       }, {
         id: '6',
         name: '6',
-        no_of_years: '4',
-        no_of_sems: 5,
         code: '2016-2022'
       }
     ])
   }
-  getSpecialization() {
+
+  getSemester() {
     // return this.httpService.get('sdsad');
     return of({
-      
       id: '6',
-      name: '6',
-      no_of_years: '4',
-      no_of_sems: '4',
+      name: 'Batch 6',
       code: '2016-2022'
     })
   }
 
-  createSpecialization(formData: Object) {
+  createSemester(formData: Object) {
     // return this.httpService.post('url', formData);
     return of({})
   }
 
-  updateSpecialization(formData: Object) {
+  updateSemester(formData: Object) {
     console.log('formData: ', formData);
     // return this.httpService.patch('url', formData);
     return of({})
   }
 
-  deleteSpecialization(specializationId: string) {
-    console.log('specializationId: ', specializationId);
+  deleteSemester(semesterId: string) {
+    console.log('semesterId: ', semesterId);
     // return this.httpService.delete('url', {});
     return of({})
   }
 }
-
-  
-
-
-
