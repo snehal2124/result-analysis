@@ -1,3 +1,4 @@
+
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,11 +9,12 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpService } from './core/http/http.service';
 import { BatchModule } from './features/batch/batch.module';
-import { ResultComponent } from './features/result/result.component';
 import { SemesterComponent } from './features/semester/semester.component';
-import { StudentsComponent } from './features/students/students.component';
-import { SubjectsComponent } from './features/subjects/subjects.component';
+
+import { SubjectComponent } from './features/subject/subject.component';
 import { SharedModule } from './shared/shared.module';
+import { ResultComponent } from './features/result/result.component';
+import { StudentComponent } from './features/student/student.component';
 
 
 
@@ -24,9 +26,10 @@ import { SharedModule } from './shared/shared.module';
   declarations: [
     AppComponent,
     SemesterComponent,
-    SubjectsComponent,
-    StudentsComponent,
+    SubjectComponent,
     ResultComponent,
+    StudentComponent,
+    
   
   ],
   imports: [
@@ -37,6 +40,8 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     SharedModule,
     BatchModule,
+    
+    
 
   ],
   providers: [HttpService],

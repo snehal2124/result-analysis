@@ -1,0 +1,131 @@
+<div class="container p-2 my-4">
+  <div class="d-flex flex-row justify-content-between">
+    <h3>Subjects</h3>
+    <button type="button" class="btn btn-outline-dark btn-sm" (click)="openAddSubjectModal(subjectModal)">Add
+      Subject</button>
+  </div>
+  <div class="mt-4 d-flex flex-row justify-content-center">
+    <div class="d-flex flex-column align-items-center w-100">
+      <table class="table" *ngIf="subjects.length">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">code</th>
+            <th scope="col">Total_marks</th>
+            <th scope="col">Semester_id</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let Subject of subjects">
+            <tr>
+              <th scope="row">{{Subject.id}}</th>
+              <td>{{Subject.name}}</td>
+              <td>{{Subject.code}}</td>
+              <td>{{Subject.Total_marks}}</td>
+              <td>{{Subject.Semester_id}}</td>
+              <td class="d-flex flex-row">
+                <i class="bi bi-pencil-fill" (click)="openEditSubjectModal(Subject, subjectModal)"></i>
+                <i class="bi bi-trash3-fill mx-4" (click)="openDeleteSubjectModal(Subject, deleteSubjectModal)"></i>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    
+    </div>
+    <ng-container *ngIf="!subjects.length" #no_subjects_found>
+      <h5 class="mt-4 pt-4">
+        No subject found.
+      </h5>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Add subject Modal -->
+<ng-template #subjectModal let-subjectmodal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="subjectModalLabel">Add Subject</h5>
+      <div class="fs-5" aria-label="Close" (click)="subjectmodal.dismiss()">
+        <i class="bi bi-x-circle"></i>
+      </div>
+    </div>
+    <div class="modal-body">
+      <form []="subjectForm">
+        <div class="form-group">
+          <label for="subjectName">id</label>
+          <input id="subjectName" type="text" class="form-control" placeholder="Name" aria-label="Name"
+            aria-describedby="basic-addon1" formControlName="name">
+        </div>
+        <div class="form-group mt-2">
+          <label for="subjectNoOfYears">Name</label>
+          <input type="number" class="form-control" id="subjectNoOfYears" placeholder="No of Years"
+            formControlName="no_of_years">
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+          <div class="form-group mt-2">
+            <label for="startYear">code</label>
+            <input type="text" class="form-control" id="startYear" placeholder="Start Year"
+              formControlName="start_year">
+          </div>
+          <div class="form-group mt-2">
+            <label for="endYear">Total_marks</label>
+            <input type="text" class="form-control" id="endYear" placeholder="End Year" formControlName="end_year">
+          </div>
+        </div>
+        <div class="form-group mt-2">
+          <label for="subjectCode">Semester_id</label>
+          <input type="text" class="form-control" id="subjectCode" placeholder="Code" disabled>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="subjectmodal.dismiss()">Cancel</button>
+      <button type="button" class="btn btn-outline-dark btn-sm"
+        (click)="actionType  === 'add' ? createSubject() : updateSubject()">Save</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- Delete Subject Confirmation Modal -->
+<ng-template #deleteSubjectModal let-deletesubjectmodal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteSubjectModalLabel">Confirmation</h5>
+      <div class="fs-5" aria-label="Close" (click)="deletesubjectmodal.dismiss()">
+        <i class="bi bi-x-circle"></i>
+      </div>
+    </div>
+    <div class="modal-body">
+      <form>
+        Are you sure, you want to delete this subject?
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="deletesubjectmodal.dismiss()">No</button>
+      <button type="button" class="btn btn-outline-dark btn-sm" (click)="deletesubjectmodal.close()">Yes</button>
+    </div>
+  </div>
+</ng-template>
+
+<!--Pagination-->
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

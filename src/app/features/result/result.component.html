@@ -1,1 +1,134 @@
-<p>result works!</p>
+<div class="container p-2 my-4">
+    <div class="d-flex flex-row justify-content-between">
+      <h3>Result</h3>
+      <button type="button" class="btn btn-outline-dark btn-sm" (click)="openAddResultModal(resultModal)">Add
+        Result</button>
+    </div>
+    <div class="mt-4 d-flex flex-row justify-content-center">
+      <div class="d-flex flex-column align-items-center w-100">
+        <table class="table" *ngIf="results.length">
+          <thead>
+            <tr>
+              
+              <th scope="col">#</th>
+              <th scope="col">student_id</th>
+              <th scope="col">batch_id</th>
+              <th scope="col">semester_id</th>
+              <th scope="col">subject_id</th>
+              <th scope="col">marks_obtained</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let result of results">
+              <tr>
+                <th scope="row">{{result.id}}</th>
+                <td>{{result.student_id}}</td>
+                <td>{{result.batch_id}}</td>
+                <td>{{result.semester_id}}</td>
+                <td>{{result.subject_id}}</td>
+                <td>{{result.marks_obtained}}</td>
+                <td class="d-flex flex-row">
+                  <i class="bi bi-pencil-fill" (click)="openEditResultModal(result, resultModal)"></i>
+                  <i class="bi bi-trash3-fill mx-4" (click)="openDeleteResultModal(result, deleteResultModal)"></i>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        
+      </div>
+      <ng-container *ngIf="!results.length" #no_results_found>
+        <h5 class="mt-4 pt-4">
+          No Result found.
+        </h5>
+      </ng-container>
+    </div>
+  </div>
+  
+  <!-- Add Result Modal -->
+  <ng-template #resultModal let-resultmodal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultModalLabel">Add Result</h5>
+        <div class="fs-5" aria-label="Close" (click)="resultmodal.dismiss()">
+          <i class="bi bi-x-circle"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form []="resultForm">
+          <div class="form-group">
+            <label for="resultId">Id</label>
+            <input id="resultId" type="text" class="form-control" placeholder="Id" aria-label="Id"
+              aria-describedby="basic-addon1" formControlName="id">
+          </div>
+          <div class="form-group mt-2">
+            <label for="resultStudentid">Student_id</label>
+            <input type="number" class="form-control" id="resultStudentid" placeholder="student_id"
+              formControlName="student_id">
+          </div>
+          <div class="d-flex flex-row justify-content-between">
+            <div class="form-group mt-2">
+              <label for="semesterid">Semester_id</label>
+              <input type="number" class="form-control" id="semesterid" placeholder="semester_id"
+                formControlName="semester_id">
+            </div>
+            <div class="form-group mt-2">
+              <label for="mark">marks</label>
+              <input type="number" class="form-control" id="marks_obtained" placeholder="" formControlName="marks">
+            </div>
+          </div>
+          <div class="form-group mt-2">
+            <label for="resultCode">Code</label>
+            <input type="text" class="form-control" id="resultCode" placeholder="Code" disabled>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="resultmodal.dismiss()">Cancel</button>
+        <button type="button" class="btn btn-outline-dark btn-sm"
+          (click)="actionType  === 'add' ? createResult() : updateResult()">Save</button>
+      </div>
+    </div>
+  </ng-template>
+  
+  
+  <!-- Delete Result Confirmation Modal -->
+  <ng-template #deleteResultModal let-deleteresultmodal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteResultModalLabel">Confirmation</h5>
+        <div class="fs-5" aria-label="Close" (click)="deleteresultmodal.dismiss()">
+          <i class="bi bi-x-circle"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form>
+          Are you sure, you want to delete this result?
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="deleteresultmodal.dismiss()">No</button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="deleteresultmodal.close()">Yes</button>
+      </div>
+    </div>
+  </ng-template>
+  
+  <!--Pagination-->
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

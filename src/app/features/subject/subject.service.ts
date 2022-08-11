@@ -1,11 +1,11 @@
-import { HttpService } from './../../core/http/http.service';
+import { HttpService } from '../../core/http/http.service';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SubjectsService {
+export class SubjectService {
 
   constructor(private httpService: HttpService) { }
 
@@ -70,7 +70,7 @@ export class SubjectsService {
     })
   }
 
-  createSubject(formData: Object) {
+  createSubject(_formData: Object) {
     // return this.httpService.post('url', formData);
     return of({})
   }
@@ -81,8 +81,8 @@ export class SubjectsService {
     return of({})
   }
 
-  deleteSubject(batchId: string) {
-    console.log('batchId: ', batchId);
+  deleteSubject(subjectsId: string) {
+    console.log('subjectId: ', subjectsId);
     // return this.httpService.delete('url', {});
     return of({})
   }

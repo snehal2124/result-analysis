@@ -1,9 +1,10 @@
-import { SubjectsComponent } from './features/subjects/subjects.component';
-import { NgModule } from '@angular/core';
+import { StudentComponent } from './features/student/student.component';
+import { SubjectComponent } from './features/subject/subject.component';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Subject } from 'rxjs';
 import { BatchComponent } from './features/batch/batch.component';
 import { SpecializationComponent } from './features/specialization/specialization.component';
+import { ResultComponent } from './features/result/result.component';
 
 const routes: Routes = [
   {
@@ -17,10 +18,17 @@ const routes: Routes = [
   },
   {
     path: 'subjects',
-    component: SubjectsComponent
-    // loadChildren: () => import('./features/subjects/subjects.services').then(m=> m.SubjectServices)
-    
+    component: SubjectComponent
+    //  // loadChildren: () => import('./features/subject/subject.module').then(m => m.SubjectModule)
   },
+{
+  path: 'results',
+  component: ResultComponent
+},
+{
+  path: 'students',
+  component: StudentComponent
+},
 ];
 
 @NgModule({
