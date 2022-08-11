@@ -13,7 +13,7 @@ export class SpecializationComponent implements OnInit {
   specializations: any[] = [];
   specializationForm : FormGroup = this.formBuilder.group({});
 
-  page = 4;
+  page = 1;
   pageSize = 2;
 
   actionType: string = '';

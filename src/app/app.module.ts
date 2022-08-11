@@ -27,13 +27,7 @@ import { SubjectsComponent } from './features/subjects/subjects.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SpecializationComponent,
-    StudentComponent,
-    StaffComponent,
-    SemesterComponent,
-    SubjectsComponent,
-    StudentComponent,
-    ResultComponent,
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,
