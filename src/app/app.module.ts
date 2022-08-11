@@ -19,7 +19,9 @@ import { SpecializationComponent } from './features/specialization/specializatio
 import { SpecializationModule } from './features/specialization/specialization.module';
 import { StudentComponent } from './features/student/student.component';
 import { StaffComponent } from './features/staff/staff.component';
-
+import { ResultComponent } from './features/result/result.component';
+import { SemesterComponent } from './features/semester/semester.component';
+import { SubjectsComponent } from './features/subjects/subjects.component';
 
 
 @NgModule({
@@ -27,7 +29,11 @@ import { StaffComponent } from './features/staff/staff.component';
     AppComponent,
     SpecializationComponent,
     StudentComponent,
-    StaffComponent
+    StaffComponent,
+    SemesterComponent,
+    SubjectsComponent,
+    StudentComponent,
+    ResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,6 @@ import { StaffComponent } from './features/staff/staff.component';
     SemesterModule,
     SpecializationModule,
     ReactiveFormsModule
-    
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

@@ -1,5 +1,7 @@
+import { SubjectsComponent } from './features/subjects/subjects.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Subject } from 'rxjs';
 import { BatchComponent } from './features/batch/batch.component';
 import { SpecializationComponent } from './features/specialization/specialization.component';
 import { SemesterComponent } from './features/semester/semester.component';
@@ -27,7 +29,12 @@ const routes: Routes = [
   {
     path: 'staff',
     component: StaffComponent
-  }
+  },
+  {
+    path: 'subjects',
+    component: SubjectsComponent
+    
+  },
 ];
 
 @NgModule({
