@@ -28,11 +28,11 @@ export class SemesterService {
         code: '2016-2022'
       },
       {
-        id: '5',
+        id: '4',
         name: '5',
         code: '2016-2022'
       }, {
-        id: '6',
+        id: '5',
         name: '6',
         code: '2016-2022'
       }

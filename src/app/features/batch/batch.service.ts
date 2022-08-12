@@ -37,14 +37,14 @@ export class BatchService {
         code: '2016-2022'
       },
       {
-        id: '5',
+        id: '4',
         name: 'Batch 5',
         no_of_years: '4',
         start_year: 2016,
         end_year: 2020,
         code: '2016-2022'
       }, {
-        id: '6',
+        id: '5',
         name: 'Batch 6',
         no_of_years: '4',
         start_year: 2016,

@@ -18,7 +18,7 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let staff of staffs">
+            <ng-container *ngFor="let staff of staffs | slice: (page-1) * pageSize : page * pageSize">
               <tr>
                 <th scope="row">{{staff.id}}</th>
                 <td>{{staff.firstname}}</td>
@@ -47,7 +47,7 @@
   <ng-template #staffModal let-staffmodal>
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="batchModalLabel">Add Staff</h5>
+        <h5 class="modal-title" id="batchModalLabel">{{actionType === 'add' ? 'Add' : 'Edit'}}  Staff</h5>
         <div class="fs-5" aria-label="Close" (click)="staffmodal.dismiss()">
           <i class="bi bi-x-circle"></i>
         </div>

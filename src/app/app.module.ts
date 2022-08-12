@@ -13,6 +13,8 @@ import { StaffModule } from './features/staff/staff.module';
 
 import { SemesterModule } from './features/semester/semester.module';
 import { StudentModule } from './features/student/student.module';
+import { SubjectModule } from './features/subject/subject.module';
+
 
 import { SharedModule } from './shared/shared.module';
 import { SpecializationComponent } from './features/specialization/specialization.component';
@@ -21,13 +23,15 @@ import { StudentComponent } from './features/student/student.component';
 import { StaffComponent } from './features/staff/staff.component';
 import { ResultComponent } from './features/result/result.component';
 import { SemesterComponent } from './features/semester/semester.component';
-import { SubjectsComponent } from './features/subjects/subjects.component';
+import { SubjectComponent } from './features/subject/subject.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SubjectsComponent
+    SubjectComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,7 @@ import { SubjectsComponent } from './features/subjects/subjects.component';
     StudentModule,
     SemesterModule,
     SpecializationModule,
+    SubjectModule,
     ReactiveFormsModule
   ],
   providers: [HttpService],

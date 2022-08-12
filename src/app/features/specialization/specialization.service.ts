@@ -36,13 +36,13 @@ export class SpecializationService {
         code: '2016-2022'
       },
       {
-        id: '5',
+        id: '4',
         name: '5',
         no_of_years: '4',
         no_of_sems: 4,
         code: '2016-2022'
       }, {
-        id: '6',
+        id: '5',
         name: '6',
         no_of_years: '4',
         no_of_sems: 5,

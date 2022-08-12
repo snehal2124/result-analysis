@@ -16,7 +16,7 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let semester of semesters">
+            <ng-container *ngFor="let semester of semesters | slice: (page-1) * pageSize : page * pageSize">
               <tr>
                 <th scope="row">{{semester.id}}</th>
                 <td>{{semester.name}}</td>
@@ -43,7 +43,7 @@
   <ng-template #semesterModal let-semestermodal>
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="semesterModalLabel">Add Batch</h5>
+        <h5 class="modal-title" id="semesterModalLabel">{{actionType === 'add' ? 'Add' : 'Edit'}}  Semester</h5>
         <div class="fs-5" aria-label="Close" (click)="semestermodal.dismiss()">
           <i class="bi bi-x-circle"></i>
         </div>

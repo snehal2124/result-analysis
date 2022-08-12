@@ -19,7 +19,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let batch of batches">
+          <ng-container *ngFor="let batch of batches | slice: (page-1) * pageSize : page * pageSize">
             <tr>
               <th scope="row">{{batch.id}}</th>
               <td>{{batch.name}}</td>
@@ -49,7 +49,7 @@
 <ng-template #batchModal let-batchmodal>
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="batchModalLabel">Add Batch</h5>
+      <h5 class="modal-title" id="batchModalLabel">{{actionType === 'add' ? 'Add' : 'Edit'}} Batch</h5>
       <div class="fs-5" aria-label="Close" (click)="batchmodal.dismiss()">
         <i class="bi bi-x-circle"></i>
       </div>

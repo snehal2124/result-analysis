@@ -22,7 +22,7 @@
         <tbody>
           <ng-container *ngFor="let specialization of specializations | slice: (page-1) * pageSize : page * pageSize">
             <tr>
-              <th scope="row">{{specialization.id}} - {{page * pageSize}} - {{(page-1) * pageSize}}</th>
+              <th scope="row">{{specialization.id}}</th>
               <td>{{specialization.name}}</td>
               <td>{{specialization.no_of_years}}</td>
               <td>{{specialization.no_of_sems}}</td>

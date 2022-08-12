@@ -22,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let student of students">
+            <ng-container *ngFor="let student of students | slice: (page-1) * pageSize : page * pageSize">
               <tr>
                 <th scope="row">{{student.id}}</th>
                 <td>{{student.name}}</td>
@@ -54,7 +54,7 @@
   <ng-template #studentModal let-studentmodal>
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="studentModalLabel">Add Student</h5>
+        <h5 class="modal-title" id="studentModalLabel">{{actionType === 'add' ? 'Add' : 'Edit'}} Student</h5>
         <div class="fs-5" aria-label="Close" (click)="studentmodal.dismiss()">
           <i class="bi bi-x-circle"></i>
         </div>

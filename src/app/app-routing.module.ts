@@ -1,4 +1,4 @@
-import { SubjectsComponent } from './features/subjects/subjects.component';
+import { SubjectComponent } from './features/subject/subject.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'subjects',
-    component: SubjectsComponent
+    component: SubjectComponent
     
   },
 ];
