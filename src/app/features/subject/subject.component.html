@@ -11,19 +11,23 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Totla Marks</th>
+            <th scope="col">code</th>
+            <th scope="col">Total_marks</th>
+            <th scope="col">Semester_id</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let subject of subjects | slice: (page-1) * pageSize : page * pageSize">
+          <ng-container *ngFor="let Subject of subjects">
             <tr>
-              <th scope="row">{{subject.id}}</th>
-              <td>{{subject.name}}</td>
-              <td>{{subject.totalmarks}}</td>
+              <th scope="row">{{Subject.id}}</th>
+              <td>{{Subject.name}}</td>
+              <td>{{Subject.code}}</td>
+              <td>{{Subject.Total_marks}}</td>
+              <td>{{Subject.Semester_id}}</td>
               <td class="d-flex flex-row">
-                <i class="bi bi-pencil-fill" (click)="openEditSubjectModal(subject, subjectModal)"></i>
-                <i class="bi bi-trash3-fill mx-4" (click)="openDeleteSubjectModal(subject, deleteSubjectModal)"></i>
+                <i class="bi bi-pencil-fill" (click)="openEditSubjectModal(Subject, subjectModal)"></i>
+                <i class="bi bi-trash3-fill mx-4" (click)="openDeleteSubjectModal(Subject, deleteSubjectModal)"></i>
               </td>
             </tr>
           </ng-container>
@@ -39,7 +43,7 @@
   </div>
 </div>
 
-<!-- Add Batch Modal -->
+<!-- Add subject Modal -->
 <ng-template #subjectModal let-subjectmodal>
   <div class="modal-content">
     <div class="modal-header">
@@ -56,9 +60,24 @@
             aria-describedby="basic-addon1" formControlName="name">
         </div>
         <div class="form-group mt-2">
-          <label for="totalmarks">Total Marks</label>
-          <input type="number" class="form-control" id="totalmarks" placeholder="totalmarks"
-            formControlName="totalmarks">
+          <label for="subjectNoOfYears">Name</label>
+          <input type="number" class="form-control" id="subjectNoOfYears" placeholder="No of Years"
+            formControlName="no_of_years">
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+          <div class="form-group mt-2">
+            <label for="startYear">code</label>
+            <input type="text" class="form-control" id="startYear" placeholder="Start Year"
+              formControlName="start_year">
+          </div>
+          <div class="form-group mt-2">
+            <label for="endYear">Total_marks</label>
+            <input type="text" class="form-control" id="endYear" placeholder="End Year" formControlName="end_year">
+          </div>
+        </div>
+        <div class="form-group mt-2">
+          <label for="subjectCode">Semester_id</label>
+          <input type="text" class="form-control" id="subjectCode" placeholder="Code" disabled>
         </div>
       </form>
     </div>
@@ -70,8 +89,7 @@
   </div>
 </ng-template>
 
-
-<!-- Delete Batch Confirmation Modal -->
+<!-- Delete Subject Confirmation Modal -->
 <ng-template #deleteSubjectModal let-deletesubjectmodal>
   <div class="modal-content">
     <div class="modal-header">

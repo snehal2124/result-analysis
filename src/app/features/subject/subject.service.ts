@@ -1,4 +1,4 @@
-import { HttpService } from './../../core/http/http.service';
+import { HttpService } from '../../core/http/http.service';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 
@@ -51,7 +51,7 @@ export class SubjectService {
     })
   }
 
-  createSubject(formData: Object) {
+  createSubject(_formData: Object) {
     // return this.httpService.post('url', formData);
     return of({})
   }
@@ -62,8 +62,8 @@ export class SubjectService {
     return of({})
   }
 
-  deleteSubject(subjectId: string) {
-    console.log('subjectId: ', subjectId);
+  deleteSubject(subjectsId: string) {
+    console.log('subjectId: ', subjectsId);
     // return this.httpService.delete('url', {});
     return of({})
   }

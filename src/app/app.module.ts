@@ -1,3 +1,4 @@
+
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,21 +18,12 @@ import { SubjectModule } from './features/subject/subject.module';
 
 
 import { SharedModule } from './shared/shared.module';
-import { SpecializationComponent } from './features/specialization/specialization.component';
 import { SpecializationModule } from './features/specialization/specialization.module';
-import { StudentComponent } from './features/student/student.component';
-import { StaffComponent } from './features/staff/staff.component';
-import { ResultComponent } from './features/result/result.component';
-import { SemesterComponent } from './features/semester/semester.component';
-import { SubjectComponent } from './features/subject/subject.component';
-
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SubjectComponent,
-   
   ],
   imports: [
     BrowserModule,

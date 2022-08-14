@@ -1,16 +1,15 @@
+
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SubjectService } from './subject.service';
 
-
 @Component({
-  selector: 'app-subject',
+  selector: 'app-subjects',
   templateUrl: './subject.component.html',
-  styleUrls: ['./subject.component.css']
+  styleUrls: ['./subjects.component.css']
 })
 export class SubjectComponent implements OnInit {
- 
 
   subjects: any[] = [];
   subjectForm: FormGroup = this.formBuilder.group({});
@@ -19,7 +18,6 @@ export class SubjectComponent implements OnInit {
   pageSize = 2;
 
   actionType: string = '';
-
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,8 +29,9 @@ export class SubjectComponent implements OnInit {
     this.subjectForm = this.formBuilder.group({
       id: new FormControl(''),
       name: new FormControl('', Validators.required),
-      totalmarks: new FormControl('', Validators.required),
-     
+      code: new FormControl(''),
+      total_marks: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
+      semester_id: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
     });
     this.getSubjects();
   }
@@ -61,9 +60,9 @@ export class SubjectComponent implements OnInit {
     });
   }
 
-  openEditSubjectModal(subject: any, content: any) {
+  openEditSubjectModal(Subject: any, content: any) {
     this.actionType = 'edit';
-    this.subjectForm.setValue(subject);
+    this.subjectForm.setValue(Subject);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       console.log(`Closed with: ${result}`);
     }, (reason) => {
@@ -79,9 +78,9 @@ export class SubjectComponent implements OnInit {
     });
   }
 
-  openDeleteSubjectModal(subject: any, content: any) {
+  openDeleteSubjectModal(Subject: any, content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.deleteSubject(subject);
+      this.deleteSubject(Subject);
     }, (reason) => {
       console.log(`Dismissed`);
     });
@@ -94,6 +93,3 @@ export class SubjectComponent implements OnInit {
   }
 
 }
-
-
-  

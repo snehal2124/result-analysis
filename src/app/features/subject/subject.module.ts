@@ -3,15 +3,11 @@ import { CommonModule } from '@angular/common';
 import { SubjectService } from './subject.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, } from '@ng-bootstrap/ng-bootstrap';
-
-
-
-
-
+import { SubjectComponent } from './subject.component';
 
 @NgModule({
   declarations: [
-   
+    SubjectComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +15,6 @@ import { NgbModule, } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [SubjectService]
+  providers:  [SubjectService]
 })
-export class SubjectModule { }
+export class SubjectsModule { }

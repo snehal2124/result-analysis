@@ -1,12 +1,12 @@
+import { StudentComponent } from './features/student/student.component';
 import { SubjectComponent } from './features/subject/subject.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Subject } from 'rxjs';
 import { BatchComponent } from './features/batch/batch.component';
 import { SpecializationComponent } from './features/specialization/specialization.component';
 import { SemesterComponent } from './features/semester/semester.component';
-import { StudentComponent } from './features/student/student.component';
 import { StaffComponent } from './features/staff/staff.component';
+import { ResultComponent } from './features/result/result.component';
 
 const routes: Routes = [
   {
@@ -33,7 +33,14 @@ const routes: Routes = [
   {
     path: 'subjects',
     component: SubjectComponent
-    
+  },
+  {
+    path: 'results',
+    component: ResultComponent
+  },
+  {
+    path: 'students',
+    component: StudentComponent
   },
 ];
 
