@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResultService } from './result.service';
+
 
 @Component({
   selector: 'app-result',
@@ -9,7 +10,6 @@ import { ResultService } from './result.service';
   styleUrls: ['./result.component.css']
 })
 export class ResultComponent implements OnInit {
-
   results: any[] = [];
   resultForm: FormGroup = this.formBuilder.group({});
 
@@ -25,13 +25,14 @@ export class ResultComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.resultForm = this.formBuilder.group({
+    this.resultForm= this.formBuilder.group({
       id: new FormControl(''),
-      code: new FormControl(''),
-      name: new FormControl('', Validators.required),
-      no_of_years: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
-      start_year: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
-      end_year: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
+      studentid: new FormControl(''),
+      batchid: new FormControl('', Validators.required),
+      semesterid: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
+      subjectid: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
+      marksobtained: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
+
     });
     this.getResults();
   }
@@ -91,5 +92,5 @@ export class ResultComponent implements OnInit {
       this.getResults()
     });
   }
-
 }
+

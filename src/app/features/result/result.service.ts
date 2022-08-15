@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { HttpService } from 'src/app/core/http/http.service';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,59 +12,62 @@ export class ResultService {
   constructor(private httpService: HttpService) { }
 
   getResults() {
-    // return this.httpService.get('url');
     return of([
       {
         id: '1',
-        student_id: 'roll no',
-        batch_id: 'batch',
-        semester_id: 4,
-        subject_id: 'subject',
-        marks_obtained: '%',
+        studentid: 'id',
+        batchid: 'batch',
+        semesterid: 'sem_id',
+        subjectid: 'sub_id',
+        marksobtained: '%',
       },
       {
-        id: '1',
-        student_id: 'roll no',
-        batch_id: 'batch',
-        semester_id: 4,
-        subject_id: 'subject',
-        marks_obtained: '%',
+        id: '2',
+        studentid: 'id',
+        batchid: 'batch',
+        semesterid: 'sem_id',
+        subjectid: 'sub_id',
+        marksobtained: '%',
+       
       },
       {
-        id: '1',
-        student_id: 'roll no',
-        batch_id: 'batch',
-        semester_id: 4,
-        subject_id: 'subject',
-        marks_obtained: '%',
+        id: '3',
+        studentid: 'id',
+        batchid: 'batch',
+        semesterid: 'sem_id',
+        subjectid: 'sub_id',
+        marksobtained: '%',
+       
       },
       {
-        id: '1',
-        student_id: 'roll no',
-        batch_id: 'batch',
-        semester_id: 4,
-        subject_id: 'subject',
-        marks_obtained: '%',
+        id: '4',
+        studentid: 'id',
+        batchid: 'batch',
+        semesterid: 'sem_id',
+        subjectid: 'sub_id',
+        marksobtained: '%'
+       
       }, {
-        id: '1',
-        student_id: 'roll no',
-        batch_id: 'batch',
-        semester_id: 4,
-        subject_id: 'subject',
-        marks_obtained: '%',
+        id: '5',
+        studentid: 'id',
+        batchid: 'batch',
+        semesterid: 'sem_id',
+        subjectid: 'sub_id',
+        marksobtained: '%',
+       
       }
     ])
   }
-
   getResult() {
     // return this.httpService.get('sdsad');
     return of({
-      id: '1',
-        student_id: 'roll no',
-        batch_id: 'batch',
-        semester_id: 4,
-        subject_id: 'subject',
-        marks_obtained: '%',
+      
+      id: '6',
+      studentid: 'id',
+      batchid: 'batch',
+      semesterid: 'sem_id',
+      subjectid: 'sub_id',
+      marksobtained: '%',
      
     })
   }
@@ -84,3 +89,8 @@ export class ResultService {
     return of({})
   }
 }
+
+  
+
+
+

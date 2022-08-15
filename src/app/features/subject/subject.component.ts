@@ -30,8 +30,8 @@ export class SubjectComponent implements OnInit {
       id: new FormControl(''),
       name: new FormControl('', Validators.required),
       code: new FormControl(''),
-      total_marks: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
-      semester_id: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
+      totalmarks: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
+      semesterid: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
     });
     this.getSubjects();
   }
