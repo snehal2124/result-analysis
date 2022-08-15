@@ -54,27 +54,27 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="staffForm">
-          <div class="form-group">
-            <label for="stafffirstName">First Name</label>
-            <input id="staffName" type="text" class="form-control" placeholder="firstName" aria-label="firstName"
-              aria-describedby="basic-addon1" formControlName="firstname">
+          <div class="d-flex flex-row justify-content-between">
+          <div class="form-group mt-2">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" class="form-control" placeholder="First Name" aria-label="First Name"
+              aria-describedby="basic-addon1" formControlName="First name">
           </div>
           <div class="form-group mt-2">
             <label for="lastname">Last Name</label>
-            <input type="number" class="form-control" id="lastname" placeholder="lastname"
-              formControlName="lastname">
+            <input type="number" class="form-control" id="Last Name" placeholder="Last Name"
+              formControlName="Last Name">
           </div>
-          <div class="d-flex flex-row justify-content-between">
+        </div>
             <div class="form-group mt-2">
               <label for="email">Email</label>
               <input type="text" class="form-control" id="email" placeholder="Email"
-                formControlName="email">
+                formControlName="Email">
             </div>
             <div class="form-group mt-2">
               <label for="mobile">Mobile</label>
-              <input type="text" class="form-control" id="mobile" placeholder="mobile " formControlName="mobile">
+              <input type="text" class="form-control" id="mobile" placeholder="Mobile " formControlName="Mobile">
             </div>
-          </div>
         </form>
       </div>
       <div class="modal-footer">

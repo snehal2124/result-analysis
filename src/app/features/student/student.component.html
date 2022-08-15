@@ -61,34 +61,36 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="studentForm">
-          <div class="form-group">
+          <div class="d-flex flex-row justify-content-between">
+          <div class="form-group mt-2">
             <label for="studentName">First Name</label>
-            <input id="studentName" type="text" class="form-control" placeholder="Name" aria-label="Name"
+            <input id="studentName" type="text" class="form-control" placeholder="First Name" aria-label="First Name"
               aria-describedby="basic-addon1" formControlName="name">
           </div>
           <div class="form-group mt-2">
             <label for="studentLastName">Last Name</label>
-            <input type="number" class="form-control" id="lastName" placeholder="last name"
+            <input type="number" class="form-control" id="Last Name" placeholder="Last name"
               formControlName="last_name">
           </div>
+        </div>
           <div class="d-flex flex-row justify-content-between">
             <div class="form-group mt-2">
               <label for="rollNo">Roll no</label>
-              <input type="text" class="form-control" id="rollNo" placeholder="roll_no"
-                formControlName="roll_no">
+              <input type="text" class="form-control" id="rollNo" placeholder="Roll no"
+                formControlName="Roll no">
             </div>
             <div class="form-group mt-2">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="email" formControlName="email">
+              <label for="email">Mobile</label>
+              <input type="Mobile" class="form-control" id="Mobile" placeholder="Mobile" formControlName="Mobile">
             </div>
           </div>
           <div class="form-group mt-2">
-            <label for="studentMobile">Mobile</label>
-            <input type="text" class="form-control" id="studentMobile" placeholder="mobile" formControlName="mobile">
+            <label for="studentMobile">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email" formControlName="Email">
           </div>
           <div class="form-group mt-2">
             <label for="studentAddress">Address</label>
-            <input type="text" class="form-control" id="studentAddress" placeholder="address" formControlName="address">
+            <input type="text" class="form-control" id="studentAddress" placeholder="Address" formControlName="Address">
           </div>
         </form>
       </div>
