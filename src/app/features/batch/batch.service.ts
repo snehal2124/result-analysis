@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { HttpService } from 'src/app/core/http/http.service';
+import { ServiceUrls } from 'src/app/core/service-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -10,76 +11,24 @@ export class BatchService {
   constructor(private httpService: HttpService) { }
 
   getBatches() {
-    // return this.httpService.get('url');
-    return of([
-      {
-        id: '1',
-        name: 'Batch 1',
-        no_of_years: '4',
-        start_year: 2016,
-        end_year: 2020,
-        code: '2016-2022'
-      },
-      {
-        id: '2',
-        name: 'Batch 2',
-        no_of_years: '4',
-        start_year: 2016,
-        end_year: 2020,
-        code: '2016-2022'
-      },
-      {
-        id: '3',
-        name: 'Batch 3',
-        no_of_years: '4',
-        start_year: 2016,
-        end_year: 2020,
-        code: '2016-2022'
-      },
-      {
-        id: '4',
-        name: 'Batch 5',
-        no_of_years: '4',
-        start_year: 2016,
-        end_year: 2020,
-        code: '2016-2022'
-      }, {
-        id: '5',
-        name: 'Batch 6',
-        no_of_years: '4',
-        start_year: 2016,
-        end_year: 2020,
-        code: '2016-2022'
-      }
-    ])
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.BATCHES_URI}`);
   }
 
   getBatch() {
-    // return this.httpService.get('sdsad');
-    return of({
-      id: '6',
-      name: 'Batch 6',
-      no_of_years: '4',
-      start_year: 2016,
-      end_year: 2020,
-      code: '2016-2022'
-    })
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.BATCHES_URI}`);
   }
 
   createBatch(formData: Object) {
-    // return this.httpService.post('url', formData);
-    return of({})
+    return this.httpService.post(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.BATCHES_URI}`, formData);
   }
 
-  updateBatch(formData: Object) {
+  updateBatch(formData: any) {
     console.log('formData: ', formData);
-    // return this.httpService.patch('url', formData);
-    return of({})
+    return this.httpService.put(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.BATCHES_URI}/${formData.id}`, formData);
   }
 
   deleteBatch(batchId: string) {
     console.log('batchId: ', batchId);
-    // return this.httpService.delete('url', {});
-    return of({})
+    return this.httpService.delete(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.BATCHES_URI}/${batchId}`, {});
   }
 }

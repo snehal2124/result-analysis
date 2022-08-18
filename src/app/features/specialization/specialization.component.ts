@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SpecializationService } from './specialization.service';
 
@@ -11,7 +11,7 @@ import { SpecializationService } from './specialization.service';
 })
 export class SpecializationComponent implements OnInit {
   specializations: any[] = [];
-  specializationForm : FormGroup = this.formBuilder.group({});
+  specializationForm: FormGroup = this.formBuilder.group({});
 
   page = 1;
   pageSize = 2;
@@ -25,19 +25,21 @@ export class SpecializationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.specializationForm= this.formBuilder.group({
+    this.specializationForm = this.formBuilder.group({
       id: new FormControl(''),
-      code: new FormControl(''),
+      code: new FormControl({ value: '', disabled: true }),
       name: new FormControl('', Validators.required),
       no_of_years: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
-      no_of_sems: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
+      no_of_semesters: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
     });
+    this.specializationForm.get('name')?.valueChanges
+      .subscribe((value) => this.specializationForm.get('code')?.setValue(value?.toUpperCase()))
     this.getSpecializations();
   }
 
   getSpecializations() {
-    this.specializationService.getSpecializations().subscribe((val) => {
-      this.specializations = val;
+    this.specializationService.getSpecializations().subscribe((specializations) => {
+      this.specializations = specializations.map((specializations: any, index: number) => ({ ...specializations, index: index + 1 }));
     });
   }
 
@@ -61,7 +63,8 @@ export class SpecializationComponent implements OnInit {
 
   openEditSpecializationModal(specialization: any, content: any) {
     this.actionType = 'edit';
-    this.specializationForm.setValue(specialization);
+    const { id, code, name, no_of_years, no_of_semesters } = specialization;
+    this.specializationForm.setValue({ id, code, name, no_of_years, no_of_semesters });
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       console.log(`Closed with: ${result}`);
     }, (reason) => {

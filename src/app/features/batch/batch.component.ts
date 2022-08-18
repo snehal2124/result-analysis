@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SpecializationService } from '../specialization/specialization.service';
 import { BatchService } from './batch.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { BatchService } from './batch.service';
 export class BatchComponent implements OnInit {
 
   batches: any[] = [];
+  specializations: any[] = [];
   batchForm: FormGroup = this.formBuilder.group({});
 
   page = 1;
@@ -21,24 +23,32 @@ export class BatchComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
-    private batchService: BatchService
+    private batchService: BatchService,
+    private specializationService: SpecializationService,
   ) { }
 
   ngOnInit(): void {
     this.batchForm = this.formBuilder.group({
       id: new FormControl(''),
-      code: new FormControl(''),
+      specialization_id: new FormControl(''),
+      code: new FormControl({ value: '', disabled: true }),
       name: new FormControl('', Validators.required),
-      no_of_years: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
       start_year: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
       end_year: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
     });
     this.getBatches();
+    this.getSpecializations();
   }
 
   getBatches() {
     this.batchService.getBatches().subscribe((val) => {
-      this.batches = val;
+      this.batches = val.map((batch: any, index: number) => ({ ...batch, index: index + 1 }));
+    });
+  }
+
+  getSpecializations() {
+    this.specializationService.getSpecializations().subscribe((val) => {
+      this.specializations = val;
     });
   }
 
@@ -54,6 +64,7 @@ export class BatchComponent implements OnInit {
 
   createBatch() {
     const formValues = this.batchForm.getRawValue();
+    formValues.code = `${formValues.start_year}-${formValues.end_year}`;
     this.batchService.createBatch(formValues).subscribe((val) => {
       this.modalService.dismissAll()
       this.getBatches();
@@ -62,7 +73,8 @@ export class BatchComponent implements OnInit {
 
   openEditBatchModal(batch: any, content: any) {
     this.actionType = 'edit';
-    this.batchForm.setValue(batch);
+    const { id, specialization_id, code, name, start_year, end_year } = batch;
+    this.batchForm.setValue({ id, specialization_id, code, name, start_year, end_year });
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       console.log(`Closed with: ${result}`);
     }, (reason) => {

@@ -6,7 +6,8 @@
       Specialization</button>
   </div>
   <div class="mt-4 d-flex flex-row justify-content-center">
-    <div class="d-flex flex-column align-items-center w-100" *ngIf="specializations.length; else no_specializations_found">
+    <div class="d-flex flex-column align-items-center w-100"
+      *ngIf="specializations.length; else no_specializations_found">
 
       <table class="table">
         <thead>
@@ -20,12 +21,13 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let specialization of specializations | slice: (page-1) * pageSize : page * pageSize">
+          <ng-container
+            *ngFor="let specialization of specializations | slice: (page-1) * pageSize : page * pageSize">
             <tr>
-              <th scope="row">{{specialization.id}}</th>
+              <th scope="row">{{specialization.index}}</th>
               <td>{{specialization.name}}</td>
               <td>{{specialization.no_of_years}}</td>
-              <td>{{specialization.no_of_sems}}</td>
+              <td>{{specialization.no_of_semesters}}</td>
               <td>{{specialization.code}}</td>
               <td class="d-flex flex-row">
                 <i class="bi bi-pencil-fill"
@@ -54,7 +56,8 @@
 <ng-template #specializationModal let-specializationmodal>
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="specializationModalLabel">{{actionType === 'add' ? 'Add' : 'Edit'}} Specialization</h5>
+      <h5 class="modal-title" id="specializationModalLabel">{{actionType === 'add' ? 'Add' : 'Edit'}} Specialization
+      </h5>
 
       <div class="fs-5" aria-label="Close" (click)="specializationmodal.dismiss()">
         <i class="bi bi-x-circle"></i>
@@ -73,11 +76,11 @@
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">No Of Sems</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" formControlName="no_of_sems">
+          <input type="text" class="form-control" id="exampleInputPassword1" formControlName="no_of_semesters">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">code</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" disabled>
+          <input type="text" class="form-control" id="exampleInputPassword1" formControlName="code">
         </div>
       </form>
     </div>
