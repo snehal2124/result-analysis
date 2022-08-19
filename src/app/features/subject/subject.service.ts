@@ -15,28 +15,38 @@ export class SubjectService {
       {
         id: '1',
         name: 'Subject 1',
-        totalmarks:''
+        semesterid:'4',
+        totalmarks:'%',
+        code:'2016-2017',
       },
       {
         id: '2',
         name: 'Subject 2',
-        totalmarks:''
+        semesterid: '4',
+        totalmarks:'%',
+        code:'2016-2017',
         
       },
       {
         id: '3',
         name: 'Subject 3', 
-        totalmarks:''   
+        semesterid:'4',
+        totalmarks:'%',
+        code:'2016-2017',   
       },
       {
         id: '4',
         name: 'Subject 4',
-        totalmarks:''
+        semesterid:'4',
+        totalmarks:'%',
+        code:'2016-2017',
       }, 
       {
         id: '5',
         name: 'Subject 5',
-        totalmarks:''
+        semesterid:'4',
+        totalmarks:'%',
+        code:'2016-2017',
        }
     ])
   }
@@ -46,7 +56,9 @@ export class SubjectService {
     return of({
       id: '6',
       name: 'Subject 6',
-      totalmarks:''
+      semesterid: '4',
+      totalmarks:'%',
+      code:'2016-2017',
 
     })
   }

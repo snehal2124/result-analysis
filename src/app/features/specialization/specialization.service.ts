@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { HttpService } from 'src/app/core/http/http.service';
+import { ServiceUrls } from 'src/app/core/service-urls';
 
 
 
@@ -12,75 +13,30 @@ export class SpecializationService {
   constructor(private httpService: HttpService) { }
 
   getSpecializations() {
-    return of([
-      {
-    
-        id: '1',
-        name: '1',
-        no_of_years: '4',
-        no_of_sems: 1,
-        code: '2016-2022'
-      },
-      {
-        id: '2',
-        name: '2',
-        no_of_years: '4',
-        no_of_sems: 2,
-        code: '2016-2022'
-      },
-      {
-        id: '3',
-        name: '3',
-        no_of_years: '4',
-        no_of_sems: 3,
-        code: '2016-2022'
-      },
-      {
-        id: '4',
-        name: '5',
-        no_of_years: '4',
-        no_of_sems: 4,
-        code: '2016-2022'
-      }, {
-        id: '5',
-        name: '6',
-        no_of_years: '4',
-        no_of_sems: 5,
-        code: '2016-2022'
-      }
-    ])
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SEPECIALIZATIONS_URI}`);
   }
-  getSpecialization() {
-    // return this.httpService.get('sdsad');
-    return of({
-      
-      id: '6',
-      name: '6',
-      no_of_years: '4',
-      no_of_sems: '4',
-      code: '2016-2022'
-    })
+
+  getSpecialization(specializationId: string) {
+    console.log('specializationId: ', specializationId);
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SEPECIALIZATIONS_URI}`);
   }
 
   createSpecialization(formData: Object) {
-    // return this.httpService.post('url', formData);
-    return of({})
+    return this.httpService.post(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SEPECIALIZATIONS_URI}`, formData);
   }
 
-  updateSpecialization(formData: Object) {
+  updateSpecialization(formData: any) {
     console.log('formData: ', formData);
-    // return this.httpService.patch('url', formData);
-    return of({})
+    return this.httpService.put(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SEPECIALIZATIONS_URI}/${formData.id}`, formData);
   }
 
   deleteSpecialization(specializationId: string) {
     console.log('specializationId: ', specializationId);
-    // return this.httpService.delete('url', {});
-    return of({})
+    return this.httpService.delete(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SEPECIALIZATIONS_URI}/${specializationId}`);
   }
 }
 
-  
+
 
 
 

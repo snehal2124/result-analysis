@@ -45,6 +45,18 @@ export class HttpService {
     );
   }
 
+  put(url: string, body: any, options: Object = {}): Observable<any> {
+    return this.httpClient.put(url, body, options).pipe(
+      map((httpResponse) => {
+        return httpResponse || {};
+      }),
+      catchError((httpErrorResponse) => {
+        console.log('httpErrorResponse: ', httpErrorResponse);
+        return httpErrorResponse;
+      })
+    );
+  }
+
   delete(url: string, options: Object = {}): Observable<any> {
     return this.httpClient.delete(url, options).pipe(
       map((httpResponse) => {
