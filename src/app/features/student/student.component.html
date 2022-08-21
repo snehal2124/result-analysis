@@ -5,18 +5,17 @@
         Student</button>
     </div>
     <div class="mt-4 d-flex flex-row justify-content-center">
-      <div class="d-flex flex-column align-items-center w-100">
-        <table class="table" *ngIf="students.length">
+      <div class="d-flex flex-column align-items-center w-100" *ngIf="students.length">
+        <table class="table">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col"> First Name</th>
+              <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Roll no</th>
               <th scope="col">Email</th>
               <th scope="col">Mobile</th>
               <th scope="col">Address</th>
-              <th></th>
               <th scope="col">Actions</th>
               <th></th>
             </tr>
@@ -24,14 +23,13 @@
           <tbody>
             <ng-container *ngFor="let student of students | slice: (page-1) * pageSize : page * pageSize">
               <tr>
-                <th scope="row">{{student.id}}</th>
-                <td>{{student.name}}</td>
-                <td>{{student.lastName}}</td>
-                <td>{{student.rollNo}}</td>
+                <th scope="row">{{student.index}}</th>
+                <td>{{student.first_name}}</td>
+                <td>{{student.last_name}}</td>
+                <td>{{student.roll_no}}</td>
                 <td>{{student.email}}</td>
                 <td>{{student.mobile}}</td>
                 <td>{{student.address}}</td>
-                <td>{{student.code}}</td>
                 <td class="d-flex flex-row">
                   <i class="bi bi-pencil-fill" (click)="openEditStudentModal(student, studentModal)"></i>
                   <i class="bi bi-trash3-fill mx-4" (click)="openDeleteStudentModal(student, deleteStudentModal)"></i>
@@ -50,7 +48,7 @@
     </div>
   </div>
   
-  <!-- Add Batch Modal -->
+  <!-- Add Student Modal -->
   <ng-template #studentModal let-studentmodal>
     <div class="modal-content">
       <div class="modal-header">
@@ -63,34 +61,33 @@
         <form [formGroup]="studentForm">
           <div class="d-flex flex-row justify-content-between">
           <div class="form-group mt-2">
-            <label for="studentName">First Name</label>
-            <input id="studentName" type="text" class="form-control" placeholder="First Name" aria-label="First Name"
-              aria-describedby="basic-addon1" formControlName="name">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" class="form-control" placeholder="First Name" aria-label="First Name"
+             aria-describedby="basic-addon1" formControlName="first_name">
           </div>
           <div class="form-group mt-2">
-            <label for="studentLastName">Last Name</label>
-            <input type="number" class="form-control" id="Last Name" placeholder="Last name"
-              formControlName="last_name">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name"
+             aria-describedby="basic-addon1" formControlName="last_name">
           </div>
         </div>
           <div class="d-flex flex-row justify-content-between">
             <div class="form-group mt-2">
               <label for="rollNo">Roll no</label>
-              <input type="text" class="form-control" id="rollNo" placeholder="Roll no"
-                formControlName="Roll no">
+              <input type="text" class="form-control" id="rollNo" placeholder="Roll no" formControlName="roll_no">
             </div>
             <div class="form-group mt-2">
-              <label for="email">Mobile</label>
-              <input type="Mobile" class="form-control" id="Mobile" placeholder="Mobile" formControlName="Mobile">
+              <label for="mobile">Mobile</label>
+              <input type="text" class="form-control" id="mobile" placeholder="Mobile" formControlName="mobile">
             </div>
           </div>
           <div class="form-group mt-2">
-            <label for="studentMobile">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="Email" formControlName="Email">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email" formControlName="email">
           </div>
           <div class="form-group mt-2">
-            <label for="studentAddress">Address</label>
-            <input type="text" class="form-control" id="studentAddress" placeholder="Address" formControlName="Address">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address" placeholder="Address" formControlName="address">
           </div>
         </form>
       </div>
@@ -103,7 +100,7 @@
   </ng-template>
   
   
-  <!-- Delete Batch Confirmation Modal -->
+  <!-- Delete Student Confirmation Modal -->
   <ng-template #deleteStudentModal let-deletestudentmodal>
     <div class="modal-content">
       <div class="modal-header">

@@ -28,10 +28,10 @@ export class StudentComponent implements OnInit {
   ngOnInit(): void {
     this.studentForm = this.formBuilder.group({
       id: new FormControl(''),
-      name: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
+      first_name: new FormControl('', Validators.required),
+      last_name: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      rollNo: new FormControl('', Validators.required),
+      roll_no: new FormControl('', Validators.required),
       mobile: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
       address: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
     });
@@ -46,7 +46,7 @@ export class StudentComponent implements OnInit {
 
   openAddStudentModal(content: any) {
     this.studentForm.reset();
-    this.actionType = 'edit';
+    this.actionType = 'add';
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       console.log(`Closed with: ${result}`);
     }, (reason) => {
@@ -64,7 +64,8 @@ export class StudentComponent implements OnInit {
 
   openEditStudentModal(student: any, content: any) {
     this.actionType = 'edit';
-    this.studentForm.setValue(student);
+    const { id, first_name, last_name, email, mobile, roll_no, address } = student;
+    this.studentForm.setValue({ id, first_name, last_name, email, mobile, roll_no, address });
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       console.log(`Closed with: ${result}`);
     }, (reason) => {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { HttpService } from 'src/app/core/http/http.service';
+import { ServiceUrls } from 'src/app/core/service-urls';
 
 
 @Injectable({
@@ -11,83 +12,24 @@ export class StudentService {
   constructor(private httpService: HttpService) { }
 
   getStudents() {
-    // return this.httpService.get('url');
-    return of([
-      {
-        id: '1',
-        name: 'xxx',
-        lastName: 'xyz',
-        rollNo: '22',
-        email: 'namrata@gmail.com',
-        mobile: '99999999999',
-        address: 'nipani' 
-      },
-      {
-        id: '2',
-        name: 'xxx',
-        lastName: 'xyz',
-        rollNo: '22',
-        email: 'namrata@gmail.com',
-        mobile: '99999999999',
-        address: 'nipani'
-      },
-      {
-        id: '3',
-        name: 'xxx',
-        lastName: 'xyz',
-        rollNo: '22',
-        email: 'namrata@gmail.com',
-        mobile: '99999999999',
-        address: 'nipani'
-      },
-      {
-        id: '4',
-        name: 'xxx',
-        lastName: 'xyz',
-        rollNo: '22',
-        email: 'namrata@gmail.com',
-        mobile: '99999999999',
-        address: 'nipani'
-      },
-       {
-        id: '5',
-        name: 'xxx',
-        lastName: 'xyz',
-        rollNo: '22',
-        email: 'namrata@gmail.com',
-        mobile: '99999999999',
-        address: 'nipani'
-        
-      }
-    ])
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.STUDENTS_URI}`);
   }
 
   getStudent() {
-    // return this.httpService.get('sdsad');
-    return of({
-      id: '6',
-      name: 'xxx',
-      lastName: 'xyz',
-      email: 'namrata@gmail.com',
-      mabile: '99999999999',
-      address: 'nipani'
-    })
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.STUDENTS_URI}`);
   }
 
   createStudent(formData: Object) {
-    // return this.httpService.post('url', formData);
-    return of({})
+    return this.httpService.post(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.STUDENTS_URI}`, formData);
   }
 
-  updateStudent(formData: Object) {
+  updateStudent(formData: any) {
     console.log('formData: ', formData);
-    // return this.httpService.patch('url', formData);
-    return of({})
+    return this.httpService.put(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.STUDENTS_URI}/${formData.id}`, formData);
   }
 
   deleteStudent(studentId: string) {
-    console.log('studentId: ', studentId);
-    // return this.httpService.delete('url', {});
-    return of({})
+    console.log('studentId: ',studentId );
+    return this.httpService.delete(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.STUDENTS_URI}/${studentId}`, {});
   }
 }

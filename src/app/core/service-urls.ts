@@ -4,7 +4,7 @@ export namespace ServiceUrls {
   export const SEPECIALIZATIONS_URI = '/specializations';
   export const BATCHES_URI = '/batches';
   export const SUBJECTS_URI = '/subjects';
-  export const SMESTERS_URI = '/semesters';
+  export const SEMESTERS_URI = '/semesters';
   export const STUDENTS_URI = '/students';
   export const RESULTS_URI = '/results';
   export const STAFF_URI = '/staff';

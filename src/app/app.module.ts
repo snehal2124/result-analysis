@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpService } from './core/http/http.service';
 import { BatchModule } from './features/batch/batch.module';
-import { StaffModule } from './features/staff/staff.module';
+import { UserModule } from './features/user/user.module';
 
 import { SemesterModule } from './features/semester/semester.module';
 import { StudentModule } from './features/student/student.module';
@@ -33,7 +33,7 @@ import { ResultModule } from './features/result/result.module';
     CoreModule,
     SharedModule,
     BatchModule,
-    StaffModule,
+    UserModule,
     StudentModule,
     SemesterModule,
     SpecializationModule,
