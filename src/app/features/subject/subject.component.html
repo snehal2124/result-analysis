@@ -5,8 +5,8 @@
       Subject</button>
   </div>
   <div class="mt-4 d-flex flex-row justify-content-center">
-    <div class="d-flex flex-column align-items-center w-100">
-      <table class="table" *ngIf="subjects.length">
+    <div class="d-flex flex-column align-items-center w-100" *ngIf="subjects.length">
+      <table class="table" >
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -20,7 +20,7 @@
         <tbody>
           <ng-container *ngFor="let Subject of subjects  | slice: (page-1) * pageSize : page * pageSize">
             <tr>
-              <th scope="row">{{Subject.id}}</th>
+              <th scope="row">{{Subject.index}}</th>
               <td>{{Subject.name}}</td>
               <td>{{Subject.semesterid}}</td>
               <td>{{Subject.totalmarks}}</td>
@@ -60,22 +60,26 @@
             aria-describedby="basic-addon1" formControlName="name">
         </div>
         <div class="d-flex flex-row justify-content-between">
-          <div class="form-group mt-2">
-            <label for="semesterid">Semester id</label>
-            <input type="text" class="form-control" id="semesterid" placeholder="semesterid"
-              formControlName="semesterid">
-          </div>
+      
           <div class="form-group mt-2">
             <label for="totalmarks">Total marks</label>
-            <input type="text" class="form-control" id="totalmarks" placeholder="totalmarks" formControlName="totalmarks">
+            <input type="text" class="form-control" id="totalmarks" placeholder="totalmarks" formControlName="total_marks">
           </div>
         </div>
         <div class="form-group mt-2">
           <label for="subjectCode">Code</label>
-          <input type="text" class="form-control" id="subjectCode" placeholder="code" disabled>
+          <input type="text" class="form-control" id="subjectCode" placeholder="code" formControlName="code">
+        </div>
+        <div class="form-group mt-2">
+          <label for="semester">Semester</label>
+          <select class="form-select mt-2" placeholder="Select Semester" formControlName="semester_id">
+            <option *ngFor="let semester of semesters"[value]="semester.id">{{semester.name}}     
+            </option>
+          </select>
         </div>
       </form>
     </div>
+   
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-secondary btn-sm" (click)="subjectmodal.dismiss()">Cancel</button>
       <button type="button" class="btn btn-outline-dark btn-sm"

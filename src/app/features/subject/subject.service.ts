@@ -1,6 +1,7 @@
 import { HttpService } from '../../core/http/http.service';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { ServiceUrls } from 'src/app/core/service-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -10,74 +11,26 @@ export class SubjectService {
   constructor(private httpService: HttpService) { }
 
   getSubjects() {
-    // return this.httpService.get('url');
-    return of([
-      {
-        id: '1',
-        name: 'Subject 1',
-        semesterid:'4',
-        totalmarks:'%',
-        code:'2016-2017',
-      },
-      {
-        id: '2',
-        name: 'Subject 2',
-        semesterid: '4',
-        totalmarks:'%',
-        code:'2016-2017',
-        
-      },
-      {
-        id: '3',
-        name: 'Subject 3', 
-        semesterid:'4',
-        totalmarks:'%',
-        code:'2016-2017',   
-      },
-      {
-        id: '4',
-        name: 'Subject 4',
-        semesterid:'4',
-        totalmarks:'%',
-        code:'2016-2017',
-      }, 
-      {
-        id: '5',
-        name: 'Subject 5',
-        semesterid:'4',
-        totalmarks:'%',
-        code:'2016-2017',
-       }
-    ])
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SUBJECTS_URI}`);
   }
 
-  getSubject()  {
-    // return this.httpService.get('sdsad');
-    return of({
-      id: '6',
-      name: 'Subject 6',
-      semesterid: '4',
-      totalmarks:'%',
-      code:'2016-2017',
-
-    })
+  getSubject(subjectId: string) {
+    console.log('subjectId: ', subjectId);
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SUBJECTS_URI}`);
   }
 
-  createSubject(_formData: Object) {
-    // return this.httpService.post('url', formData);
-    return of({})
+  createSubject(formData: Object) {
+    return this.httpService.post(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SUBJECTS_URI}`, formData);
   }
 
-  updateSubject(formData: Object) {
+  updateSubject(formData: any) {
     console.log('formData: ', formData);
-    // return this.httpService.patch('url', formData);
-    return of({})
+    return this.httpService.put(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SUBJECTS_URI}/${formData.id}`, formData);
   }
 
-  deleteSubject(subjectsId: string) {
-    console.log('subjectId: ', subjectsId);
-    // return this.httpService.delete('url', {});
-    return of({})
+  deleteSubject(subjectId: string) {
+    console.log('subjectId: ', subjectId);
+    return this.httpService.delete(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SUBJECTS_URI}/${subjectId}`);
   }
 }
 

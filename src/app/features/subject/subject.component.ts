@@ -1,17 +1,19 @@
-
+import { throwError } from 'rxjs';
+import { SemesterService } from './../semester/semester.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SubjectService } from './subject.service';
 
 @Component({
-  selector: 'app-subjects',
+  selector: 'app-subject',
   templateUrl: './subject.component.html',
-  styleUrls: ['./subjects.component.css']
+  styleUrls: ['./subject.component.css']
 })
 export class SubjectComponent implements OnInit {
 
   subjects: any[] = [];
+  semesters: any[]=[];
   subjectForm: FormGroup = this.formBuilder.group({});
 
   page = 1;
@@ -22,23 +24,31 @@ export class SubjectComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private semesteronService: SemesterService,
   ) { }
 
   ngOnInit(): void {
     this.subjectForm = this.formBuilder.group({
       id: new FormControl(''),
+      semester_id: new FormControl(''),
       name: new FormControl('', Validators.required),
-      code: new FormControl(''),
-      totalmarks: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
-      semesterid: new FormControl('', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]),
+      code: new FormControl({value: '', disabled: true}),
+      total_marks: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
+      
     });
     this.getSubjects();
+    this.getSemesters();
   }
 
   getSubjects() {
     this.subjectService.getSubjects().subscribe((val) => {
-      this.subjects = val;
+      this.subjects = val.map((subject: any, index: number) => ({ ...subject, index: index + 1}));
+    });
+  }
+  getSemesters(){
+    this.semesteronService.getSemesters().subscribe((val) => {
+      this.semesters = val;
     });
   }
 
@@ -54,15 +64,17 @@ export class SubjectComponent implements OnInit {
 
   createSubject() {
     const formValues = this.subjectForm.getRawValue();
+    formValues.code = `${formValues.total_marks}-${formValues.semester_id}`;
     this.subjectService.createSubject(formValues).subscribe((val) => {
       this.modalService.dismissAll()
       this.getSubjects();
     });
   }
 
-  openEditSubjectModal(Subject: any, content: any) {
+  openEditSubjectModal(subject: any, content: any) {
     this.actionType = 'edit';
-    this.subjectForm.setValue(Subject);
+    const {id, name, code, total_marks, semester_id,} = subject;
+    this.subjectForm.setValue({id, name,code,total_marks, semester_id});
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       console.log(`Closed with: ${result}`);
     }, (reason) => {
@@ -86,7 +98,7 @@ export class SubjectComponent implements OnInit {
     });
   }
 
-  deleteSubject(subject: any) {
+  deleteSubject(subject: any): void {
     this.subjectService.deleteSubject(subject.id).subscribe((val) => {
       this.getSubjects()
     });

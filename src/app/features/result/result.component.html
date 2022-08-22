@@ -22,7 +22,7 @@
           <tbody>
             <ng-container *ngFor="let result of results | slice: (page-1) * pageSize : page * pageSize">
               <tr>
-                <th scope="row">{{result.id}} - {{page * pageSize}} - {{(page-1) * pageSize}}</th>
+                <th scope="row">{{result.id}}</th>
                 <td>{{result.studentid}}</td>
                 <td>{{result.batchid}}</td>
                 <td>{{result.semesterid}}</td>
@@ -66,19 +66,6 @@
       <div class="modal-body">
         <form [formGroup]="resultForm">
           <div class="form-group">
-            <label for="studentid">Student id</label>
-            <input type="text" class="form-control" id="studentid" aria-describedby="studentid"
-              formControlName="studentid">
-          </div>
-          <div class="form-group">
-            <label for="batchid">Batch id</label>
-            <input type="text" class="form-control" id="batchid" formControlName="batchid">
-          </div>
-          <div class="form-group">
-            <label for="semesterid">Semester id</label>
-            <input type="text" class="form-control" id="semesterid" formControlName="semesterid">
-          </div>
-          <div class="form-group">
             <label for="subjectid">Subject id</label>
             <input type="text" class="form-control" id="subjectid" formControlName="subjectid">
           </div>
@@ -87,6 +74,27 @@
             <input type="text" class="form-control" id="marksobtained" formControlName="marksobtained">
           </div>
         </form>
+      </div> 
+      <div class="form-group mt-2">
+        <label for="studentid">Student</label>
+        <select class="form-select mt-2" placeholder="Select Student" formControlName="Student_id">
+          <option *ngFor="let student of students" [value]="student.id">{{student.name}}  
+          </option>
+        </select>
+      </div>
+      <div class="form-group mt-2">
+        <label for="batchtid">Batch</label>
+        <select class="form-select mt-2" placeholder="Select Batch" formControlName="Batch_id">
+          <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}  
+          </option>
+        </select>
+      </div>
+      <div class="form-group mt-2">
+        <label for="semesterid">Semester</label>
+        <select class="form-select mt-2" placeholder="Select Semester" formControlName="Student_id">
+          <option *ngFor="let semester of semesters" [value]="semester.id">{{semester.name}}  
+          </option>
+        </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary btn-sm"
