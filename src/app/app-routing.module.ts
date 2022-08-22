@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BatchComponent } from './features/batch/batch.component';
 import { SpecializationComponent } from './features/specialization/specialization.component';
 import { SemesterComponent } from './features/semester/semester.component';
-import { StaffComponent } from './features/staff/staff.component';
+import { UserComponent } from './features/user/user.component';
 import { ResultComponent } from './features/result/result.component';
 
 const routes: Routes = [
@@ -27,8 +27,8 @@ const routes: Routes = [
     component: StudentComponent
   },
   {
-    path: 'staff',
-    component: StaffComponent
+    path: 'user',
+    component: UserComponent
   },
   {
     path: 'subjects',

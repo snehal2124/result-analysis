@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { StaffComponent } from './staff.component';
+import { UserComponent } from './user.component';
 
 
 
 @NgModule({
-  declarations: [StaffComponent],
+  declarations: [UserComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -15,4 +15,4 @@ import { StaffComponent } from './staff.component';
     NgbModule
   ]
 })
-export class StaffModule { }
+export class UserModule { }

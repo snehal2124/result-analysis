@@ -5,8 +5,8 @@
         Semester</button>
     </div>
     <div class="mt-4 d-flex flex-row justify-content-center">
-      <div class="d-flex flex-column align-items-center w-100">
-        <table class="table" *ngIf="semesters.length">
+      <div class="d-flex flex-column align-items-center w-100" *ngIf="semesters.length">
+        <table class="table">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -57,7 +57,21 @@
           </div>
           <div class="form-group mt-2">
             <label for="semesterCode">Code</label>
-            <input type="text" class="form-control" id="semesterCode" placeholder="Code" disabled>
+            <input type="text" class="form-control" id="semesterCode" placeholder="Code" formControlName="code">
+          </div>
+          <div class="form-group mt-2">
+            <label for="batchCode">Specialization</label>
+            <select class="form-select mt-2" placeholder="Select Specialization" formControlName="specialization_id">
+              <option *ngFor="let specialization of specializations" [value]="specialization.id">{{specialization.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mt-2">
+            <label for="batchCode">Batch</label>
+            <select class="form-select mt-2" placeholder="Select Batch" formControlName="batch_id">
+              <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}
+              </option>
+            </select>
           </div>
         </form>
       </div>
