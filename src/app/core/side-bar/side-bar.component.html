@@ -1,6 +1,6 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark side-nav">
   <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item" *ngFor="let nav of sideNav">
+    <li class="nav-item" *ngFor="let nav of sideNav[user.type]">
       <a class="nav-link text-white" [routerLink]="nav.route">
         {{nav.name}}
       </a>

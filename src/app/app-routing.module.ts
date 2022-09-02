@@ -11,6 +11,7 @@ import { LoginComponent } from './core/login/login.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { AdminGuard } from './shared/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -19,32 +20,27 @@ const routes: Routes = [
   },
   {
     path: 'specializations',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     component: SpecializationComponent
   },
   {
     path: 'batches',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     component: BatchComponent
   },
   {
     path: 'semester',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     component: SemesterComponent
   },
   {
-    path: 'student',
-    canActivate: [AuthGuard],
-    component: StudentComponent
-  },
-  {
     path: 'staff',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     component: UserComponent
   },
   {
     path: 'subjects',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     component: SubjectComponent
   },
   {
