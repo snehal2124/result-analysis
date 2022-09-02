@@ -1,129 +1,121 @@
 <div class="container p-2 my-4">
-    <div class="d-flex flex-row justify-content-between">
-      <h3>Result</h3>
-      <button type="button" class="btn btn-outline-dark btn-sm"
-        (click)="openAddResultModal(resultModal)">Add
-        Result</button>
-    </div>
-    <div class="mt-4 d-flex flex-row justify-content-center">
-      <div class="d-flex flex-column align-items-center w-100" *ngIf="results.length">
+  <div class="d-flex flex-row justify-content-between">
+    <h3>Result</h3>
+    <button type="button" class="btn btn-outline-dark btn-sm" (click)="openAddResultModal(resultModal)">Add
+      Result</button>
+  </div>
+  <div class="mt-4 d-flex flex-row justify-content-center">
+    <div class="d-flex flex-column align-items-center w-100" *ngIf="results.length">
 
-        <table class="table">
-          <thead>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Student id</th>
+            <th scope="col">Batch id</th>
+            <th scope="col">Semester id</th>
+            <th scope="col">Subject id</th>
+            <th scope="col">Marks obtained</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let result of results | slice: (page-1) * pageSize : page * pageSize">
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Student id</th>
-              <th scope="col">Batch id</th>
-              <th scope="col">Semester id</th>
-              <th scope="col">Subject id</th>
-              <th scope="col">Marks obtained</th>
+              <th scope="row">{{result.id}}</th>
+              <td>{{result.studentid}}</td>
+              <td>{{result.batchid}}</td>
+              <td>{{result.semesterid}}</td>
+              <td>{{result.subjectid}}</td>
+              <td>{{result.marksobtained}}</td>
+
+              <td class="d-flex flex-row">
+                <i class="bi bi-pencil-fill" (click)="openEditResultModal(result, resultModal)"></i>
+                <i class="bi bi-trash3-fill mx-4" (click)="openDeleteResultModal(result, deleteResultModal)"></i>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngFor="let result of results | slice: (page-1) * pageSize : page * pageSize">
-              <tr>
-                <th scope="row">{{result.id}}</th>
-                <td>{{result.studentid}}</td>
-                <td>{{result.batchid}}</td>
-                <td>{{result.semesterid}}</td>
-                <td>{{result.subjectid}}</td>
-                <td>{{result.marksobtained}}</td>
+          </ng-container>
+        </tbody>
+      </table>
+      <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="results.length"></ngb-pagination>
 
-                <td class="d-flex flex-row">
-                  <i class="bi bi-pencil-fill"
-                    (click)="openEditResultModal(result, resultModal)"></i>
-                  <i class="bi bi-trash3-fill mx-4"
-                    (click)="openDeleteResultModal(result, deleteResultModal)"></i>
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
-        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="results.length"></ngb-pagination>
-
-      </div>
-      <div *ngIf="!results.length" #no_results_found>
-        <h5 class="mt-4 pt-4">
-          No Results found.
-        </h5>
-      </div>
+    </div>
+    <div *ngIf="!results.length" #no_results_found>
+      <h5 class="mt-4 pt-4">
+        No Results found.
+      </h5>
     </div>
   </div>
+</div>
 
+<!-- Modal -->
+<ng-template #resultModal let-resultmodal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="resultModalLabel">{{actionType === 'add' ? 'Add' : 'Edit'}} Result</h5>
 
-
-
-  <!-- Modal -->
-  <ng-template #resultModal let-resultmodal>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="resultModalLabel">{{actionType === 'add' ? 'Add' : 'Edit'}} Result</h5>
-
-        <div class="fs-5" aria-label="Close" (click)="resultmodal.dismiss()">
-          <i class="bi bi-x-circle"></i>
-        </div>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="resultForm">
-          <div class="form-group">
-            <label for="subjectid">Subject id</label>
-            <input type="text" class="form-control" id="subjectid" formControlName="subjectid">
-          </div>
-          <div class="form-group">
-            <label for="marksobtained">Marks obtained</label>
-            <input type="text" class="form-control" id="marksobtained" formControlName="marksobtained">
-          </div>
-        </form>
-      </div>
-      <div class="form-group mt-2">
-        <label for="studentid">Student</label>
-        <select class="form-select mt-2" placeholder="Select Student" formControlName="Student_id">
-          <option *ngFor="let student of students" [value]="student.id">{{student.name}}
-          </option>
-        </select>
-      </div>
-      <div class="form-group mt-2">
-        <label for="batchtid">Batch</label>
-        <select class="form-select mt-2" placeholder="Select Batch" formControlName="Batch_id">
-          <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}
-          </option>
-        </select>
-      </div>
-      <div class="form-group mt-2">
-        <label for="semesterid">Semester</label>
-        <select class="form-select mt-2" placeholder="Select Semester" formControlName="Student_id">
-          <option *ngFor="let semester of semesters" [value]="semester.id">{{semester.name}}
-          </option>
-        </select>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary btn-sm"
-          (click)="resultmodal.dismiss()">Cancel</button>
-        <button type="button" class="btn btn-outline-dark btn-sm"
-          (click)="actionType  === 'add' ? createResult() : updateResult()">Save</button>
+      <div class="fs-5" aria-label="Close" (click)="resultmodal.dismiss()">
+        <i class="bi bi-x-circle"></i>
       </div>
     </div>
-  </ng-template>
-
-
-  <!-- Delete Result Confirmation Modal -->
-  <ng-template #deleteResultModal let-deleteresultmodal>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteResultModalLabel">Confirmation</h5>
-        <div class="fs-5" aria-label="Close" (click)="deleteresultmodal.dismiss()">
-          <i class="bi bi-x-circle"></i>
+    <div class="modal-body">
+      <form [formGroup]="resultForm">
+        <div class="form-group">
+          <label for="subjectid">Subject id</label>
+          <input type="text" class="form-control" id="subjectid" formControlName="subjectid">
         </div>
-      </div>
-      <div class="modal-body">
-        <form>
-          Are you sure, you want to delete this result?
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary btn-sm"
-          (click)="deleteresultmodal.dismiss()">No</button>
-        <button type="button" class="btn btn-outline-dark btn-sm" (click)="deleteresultmodal.close()">Yes</button>
+        <div class="form-group">
+          <label for="marksobtained">Marks obtained</label>
+          <input type="text" class="form-control" id="marksobtained" formControlName="marksobtained">
+        </div>
+      </form>
+    </div>
+    <div class="form-group mt-2">
+      <label for="studentid">Student</label>
+      <select class="form-select mt-2" placeholder="Select Student" formControlName="Student_id">
+        <option *ngFor="let student of students" [value]="student.id">{{student.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group mt-2">
+      <label for="batchtid">Batch</label>
+      <select class="form-select mt-2" placeholder="Select Batch" formControlName="Batch_id">
+        <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group mt-2">
+      <label for="semesterid">Semester</label>
+      <select class="form-select mt-2" placeholder="Select Semester" formControlName="Student_id">
+        <option *ngFor="let semester of semesters" [value]="semester.id">{{semester.name}}
+        </option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="resultmodal.dismiss()">Cancel</button>
+      <button type="button" class="btn btn-outline-dark btn-sm"
+        (click)="actionType  === 'add' ? createResult() : updateResult()">Save</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- Delete Result Confirmation Modal -->
+<ng-template #deleteResultModal let-deleteresultmodal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteResultModalLabel">Confirmation</h5>
+      <div class="fs-5" aria-label="Close" (click)="deleteresultmodal.dismiss()">
+        <i class="bi bi-x-circle"></i>
       </div>
     </div>
-  </ng-template>
+    <div class="modal-body">
+      <form>
+        Are you sure, you want to delete this result?
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="deleteresultmodal.dismiss()">No</button>
+      <button type="button" class="btn btn-outline-dark btn-sm" (click)="deleteresultmodal.close()">Yes</button>
+    </div>
+  </div>
+</ng-template>

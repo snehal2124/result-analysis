@@ -1,1 +1,36 @@
-<p>dashboard works!</p>
+<div class="mt-4 d-flex flex-row justify-content-center">
+  <div class="d-flex flex-column align-items-center w-100" *ngIf="results.length">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Student id</th>
+          <th scope="col">Batch id</th>
+          <th scope="col">Semester id</th>
+          <th scope="col">Subject id</th>
+          <th scope="col">Marks obtained</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let result of results | slice: (page-1) * pageSize : page * pageSize">
+          <tr>
+            <th scope="row">{{result.id}}</th>
+            <td>{{result.studentid}}</td>
+            <td>{{result.batchid}}</td>
+            <td>{{result.semesterid}}</td>
+            <td>{{result.subjectid}}</td>
+            <td>{{result.marksobtained}}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="results.length"></ngb-pagination>
+
+  </div>
+  <div *ngIf="!results.length" #no_results_found>
+    <h5 class="mt-4 pt-4">
+      No Results found.
+    </h5>
+  </div>
+</div>

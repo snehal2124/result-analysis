@@ -21,6 +21,7 @@ import { SubjectsModule } from './features/subject/subject.module';
 import { ResultModule } from './features/result/result.module';
 import { authInterceptorProviders } from './core/interceptor/auth.interceptor';
 import { NotFoundComponent } from './features/not-found/not-found.component';
+import { DashboardModule } from './features/dashboard/dashboard.module';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
     SemesterModule,
     SpecializationModule,
     SubjectsModule,
-    ResultModule
+    ResultModule,
+    DashboardModule
   ],
   providers: [HttpService, authInterceptorProviders],
   bootstrap: [AppComponent]
