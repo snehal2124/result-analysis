@@ -1,10 +1,10 @@
 import { SemesterService } from './../semester/semester.service';
-import { BatchService } from './../../../../result-analysis/src/app/features/batch/batch.service';
 import { StudentService } from './../student/student.service';
 import { Component, OnInit } from '@angular/core';
 import {  FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResultService } from './result.service';
+import { BatchService } from '../batch/batch.service';
 
 
 @Component({
@@ -50,7 +50,7 @@ export class ResultComponent implements OnInit {
 
   getResults() {
     this.resultService.getResults().subscribe((val) => {
-      this.results = val.map((result:any, inddex: number)=> ({...result, index: inddex + 1}));
+      this.results = val?.map((result:any, inddex: number)=> ({...result, index: inddex + 1}));
     });
   }
   getStudents() {

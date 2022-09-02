@@ -7,7 +7,7 @@
     </div>
     <div class="mt-4 d-flex flex-row justify-content-center">
       <div class="d-flex flex-column align-items-center w-100" *ngIf="results.length">
-  
+
         <table class="table">
           <thead>
             <tr>
@@ -42,23 +42,23 @@
         <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="results.length"></ngb-pagination>
 
       </div>
-      <ng-template *ngIf="!results.length" #no_results_found>
+      <div *ngIf="!results.length" #no_results_found>
         <h5 class="mt-4 pt-4">
           No Results found.
         </h5>
-      </ng-template>
+      </div>
     </div>
   </div>
-  
-  
-  
-  
+
+
+
+
   <!-- Modal -->
   <ng-template #resultModal let-resultmodal>
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="resultModalLabel">{{actionType === 'add' ? 'Add' : 'Edit'}} Result</h5>
-  
+
         <div class="fs-5" aria-label="Close" (click)="resultmodal.dismiss()">
           <i class="bi bi-x-circle"></i>
         </div>
@@ -74,25 +74,25 @@
             <input type="text" class="form-control" id="marksobtained" formControlName="marksobtained">
           </div>
         </form>
-      </div> 
+      </div>
       <div class="form-group mt-2">
         <label for="studentid">Student</label>
         <select class="form-select mt-2" placeholder="Select Student" formControlName="Student_id">
-          <option *ngFor="let student of students" [value]="student.id">{{student.name}}  
+          <option *ngFor="let student of students" [value]="student.id">{{student.name}}
           </option>
         </select>
       </div>
       <div class="form-group mt-2">
         <label for="batchtid">Batch</label>
         <select class="form-select mt-2" placeholder="Select Batch" formControlName="Batch_id">
-          <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}  
+          <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}
           </option>
         </select>
       </div>
       <div class="form-group mt-2">
         <label for="semesterid">Semester</label>
         <select class="form-select mt-2" placeholder="Select Semester" formControlName="Student_id">
-          <option *ngFor="let semester of semesters" [value]="semester.id">{{semester.name}}  
+          <option *ngFor="let semester of semesters" [value]="semester.id">{{semester.name}}
           </option>
         </select>
       </div>
@@ -104,8 +104,8 @@
       </div>
     </div>
   </ng-template>
-  
-  
+
+
   <!-- Delete Result Confirmation Modal -->
   <ng-template #deleteResultModal let-deleteresultmodal>
     <div class="modal-content">

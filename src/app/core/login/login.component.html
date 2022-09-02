@@ -1,0 +1,32 @@
+<main class="form-signin">
+  <div class="text-center">
+    <h3 class="mb-4">Result Analysis</h3>
+  </div>
+  <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+    <div class="form-floating">
+      <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email" [(ngModel)]="form.email"
+        required #email="ngModel">
+      <div class="alert alert-danger mt-2" role="alert" *ngIf="email.errors && f.submitted">
+        Email is required!
+      </div>
+      <label for="emailInput">Email address</label>
+    </div>
+    <div class="form-floating mt-4">
+      <input type="password" class="form-control" if="passwordInput" name="password" [(ngModel)]="form.password"
+        required minlength="6" #password="ngModel">
+      <div class="alert alert-danger mt-2" role="alert" *ngIf="password.errors && f.submitted">
+        <div *ngIf="password.errors['required']">Password is required</div>
+        <div *ngIf="password.errors['minlength']">
+          Password must be at least 6 characters
+        </div>
+      </div>
+      <label for="passwordInput">Password</label>
+    </div>
+    <div class="form-group">
+      <div class="alert alert-danger mt-2" role="alert" *ngIf="f.submitted && isLoginFailed">
+        Login failed: {{ errorMessage }}
+      </div>
+    </div>
+    <button type="button" class="btn btn-outline-dark btn-sm w-100 mt-4" type="submit">Login In</button>
+  </form>
+</main>

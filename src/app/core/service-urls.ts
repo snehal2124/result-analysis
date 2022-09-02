@@ -9,4 +9,7 @@ export namespace ServiceUrls {
   export const RESULTS_URI = '/results';
   export const STAFF_URI = '/staff';
   export const USERS_URI = '/users';
+
+  export const SIGN_IN_URI = '/auth/signin';
+  export const LOGIN_URI = '/auth/login';
 }

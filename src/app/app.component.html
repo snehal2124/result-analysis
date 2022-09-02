@@ -1,9 +1,8 @@
 <div>
-  <app-header></app-header>
+  <app-header *ngIf="isUserLoggedIn()"></app-header>
   <div class="main-container d-flex flex-row">
-    <app-side-bar></app-side-bar>
+    <app-side-bar *ngIf="isUserLoggedIn()"></app-side-bar>
     <main class="container">
-      <span></span>
       <router-outlet></router-outlet>
     </main>
   </div>

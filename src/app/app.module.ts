@@ -19,11 +19,14 @@ import { SharedModule } from './shared/shared.module';
 import { SpecializationModule } from './features/specialization/specialization.module';
 import { SubjectsModule } from './features/subject/subject.module';
 import { ResultModule } from './features/result/result.module';
+import { authInterceptorProviders } from './core/interceptor/auth.interceptor';
+import { NotFoundComponent } from './features/not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import { ResultModule } from './features/result/result.module';
     SubjectsModule,
     ResultModule
   ],
-  providers: [HttpService],
+  providers: [HttpService, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
