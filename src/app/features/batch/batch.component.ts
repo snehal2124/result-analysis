@@ -16,7 +16,7 @@ export class BatchComponent implements OnInit {
   batchForm: FormGroup = this.formBuilder.group({});
 
   page = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   actionType: string = '';
 

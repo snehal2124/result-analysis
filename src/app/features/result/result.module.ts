@@ -8,17 +8,15 @@ import { ResultComponent } from './result.component';
 
 @NgModule({
   declarations: [
-      ResultComponent 
+      ResultComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    
-  
   ],
   providers: [ResultService]
 })
-export class ResultModule { 
+export class ResultModule {
 }

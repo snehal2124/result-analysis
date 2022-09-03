@@ -10,8 +10,8 @@ export class SubjectService {
 
   constructor(private httpService: HttpService) { }
 
-  getSubjects() {
-    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SUBJECTS_URI}`);
+  getSubjects(filterParams = '') {
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SUBJECTS_URI}${filterParams}`);
   }
 
   getSubject(subjectId: string) {

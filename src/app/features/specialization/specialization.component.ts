@@ -14,7 +14,7 @@ export class SpecializationComponent implements OnInit {
   specializationForm: FormGroup = this.formBuilder.group({});
 
   page = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   actionType: string = '';
 

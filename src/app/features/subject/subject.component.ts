@@ -17,7 +17,7 @@ export class SubjectComponent implements OnInit {
   subjectForm: FormGroup = this.formBuilder.group({});
 
   page = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   actionType: string = '';
 
@@ -33,9 +33,9 @@ export class SubjectComponent implements OnInit {
       id: new FormControl(''),
       semester_id: new FormControl(''),
       name: new FormControl('', Validators.required),
-      code: new FormControl({value: '', disabled: true}),
+      code: new FormControl('', Validators.required),
       total_marks: new FormControl('', [Validators.required, Validators.pattern(/^\[0-9]{1}$/g)]),
-      
+
     });
     this.getSubjects();
     this.getSemesters();
@@ -64,7 +64,7 @@ export class SubjectComponent implements OnInit {
 
   createSubject() {
     const formValues = this.subjectForm.getRawValue();
-    formValues.code = `${formValues.total_marks}-${formValues.semester_id}`;
+    formValues.code = `${formValues?.code?.toUpperCase()}`;
     this.subjectService.createSubject(formValues).subscribe((val) => {
       this.modalService.dismissAll()
       this.getSubjects();

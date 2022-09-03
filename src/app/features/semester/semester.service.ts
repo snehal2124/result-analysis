@@ -10,8 +10,8 @@ export class SemesterService {
 
   constructor(private httpService: HttpService) { }
 
-  getSemesters() {
-    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SEMESTERS_URI}`);
+  getSemesters(filterParams = '') {
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SEMESTERS_URI}${filterParams}`);
   }
 
   getSemester() {

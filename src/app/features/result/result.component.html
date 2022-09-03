@@ -1,8 +1,15 @@
 <div class="container p-2 my-4">
   <div class="d-flex flex-row justify-content-between">
-    <h3>Result</h3>
-    <button type="button" class="btn btn-outline-dark btn-sm" (click)="openAddResultModal(resultModal)">Add
-      Result</button>
+    <div class="d-flex flex-row">
+      <h3>Result</h3>
+    </div>
+    <div class="d-flex flex-row">
+      <button type="button" class="btn btn-outline-dark btn-sm mx-4" (click)="openAddResultModal(resultModal)">Add
+        Result</button>
+      <button type="button" class="btn btn-outline-dark btn-sm"
+        (click)="openUploadResultModal(uploadResultModal)">Upload Excel
+        Result</button>
+    </div>
   </div>
   <div class="mt-4 d-flex flex-row justify-content-center">
     <div class="d-flex flex-column align-items-center w-100" *ngIf="results.length">
@@ -11,22 +18,25 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Student id</th>
-            <th scope="col">Batch id</th>
-            <th scope="col">Semester id</th>
-            <th scope="col">Subject id</th>
+            <th scope="col">Specialization</th>
+            <th scope="col">Batch</th>
+            <th scope="col">Semester</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Student</th>
             <th scope="col">Marks obtained</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
           <ng-container *ngFor="let result of results | slice: (page-1) * pageSize : page * pageSize">
             <tr>
               <th scope="row">{{result.id}}</th>
-              <td>{{result.studentid}}</td>
-              <td>{{result.batchid}}</td>
-              <td>{{result.semesterid}}</td>
-              <td>{{result.subjectid}}</td>
-              <td>{{result.marksobtained}}</td>
+              <td>{{result.specialization_id?.name}}</td>
+              <td>{{result.batch_id?.name}}</td>
+              <td>{{result.semester_id?.name}}</td>
+              <td>{{result.subject_id?.name}}</td>
+              <td>{{result.student_id?.first_name + ' ' + result.student_id?.last_name}}</td>
+              <td>{{result.marks_obtained}}</td>
 
               <td class="d-flex flex-row">
                 <i class="bi bi-pencil-fill" (click)="openEditResultModal(result, resultModal)"></i>
@@ -59,45 +69,79 @@
     </div>
     <div class="modal-body">
       <form [formGroup]="resultForm">
-        <div class="form-group">
-          <label for="subjectid">Subject id</label>
-          <input type="text" class="form-control" id="subjectid" formControlName="subjectid">
+        <div class="form-group mt-2">
+          <label for="batchtid">Specializations</label>
+          <select class="form-select mt-2" placeholder="Select Specialization" formControlName="specialization_id">
+            <option *ngFor="let specialization of specializations" [value]="specialization.id">{{specialization.name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label for="batchtid">Batch</label>
+          <select class="form-select mt-2" placeholder="Select Batch" formControlName="batch_id">
+            <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label for="semesterid">Semester</label>
+          <select class="form-select mt-2" placeholder="Select Semester" formControlName="semester_id">
+            <option *ngFor="let semester of semesters" [value]="semester.id">{{semester.name}}
+            </option>
+          </select>
         </div>
         <div class="form-group">
+          <label for="subject">Subject</label>
+          <select class="form-select mt-2" placeholder="Select Subject" formControlName="subject_id">
+            <option *ngFor="let subject of subjects" [value]="subject.id">{{subject.name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label for="studentid">Student</label>
+          <select class="form-select mt-2" placeholder="Select Student" formControlName="student_id">
+            <option *ngFor="let student of students" [value]="student.id">{{student.first_name}} {{student.last_name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
           <label for="marksobtained">Marks obtained</label>
-          <input type="text" class="form-control" id="marksobtained" formControlName="marksobtained">
+          <input type="text" class="form-control" id="marksobtained" formControlName="marks_obtained">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="resultmodal.dismiss()">Cancel</button>
+          <button type="button" class="btn btn-outline-dark btn-sm"
+            (click)="actionType  === 'add' ? createResult() : updateResult()">Save</button>
         </div>
       </form>
-    </div>
-    <div class="form-group mt-2">
-      <label for="studentid">Student</label>
-      <select class="form-select mt-2" placeholder="Select Student" formControlName="Student_id">
-        <option *ngFor="let student of students" [value]="student.id">{{student.name}}
-        </option>
-      </select>
-    </div>
-    <div class="form-group mt-2">
-      <label for="batchtid">Batch</label>
-      <select class="form-select mt-2" placeholder="Select Batch" formControlName="Batch_id">
-        <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}
-        </option>
-      </select>
-    </div>
-    <div class="form-group mt-2">
-      <label for="semesterid">Semester</label>
-      <select class="form-select mt-2" placeholder="Select Semester" formControlName="Student_id">
-        <option *ngFor="let semester of semesters" [value]="semester.id">{{semester.name}}
-        </option>
-      </select>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="resultmodal.dismiss()">Cancel</button>
-      <button type="button" class="btn btn-outline-dark btn-sm"
-        (click)="actionType  === 'add' ? createResult() : updateResult()">Save</button>
     </div>
   </div>
 </ng-template>
 
+<!-- Upload Result CSV-->
+<ng-template #uploadResultModal let-uploadresultmodal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteResultModalLabel">Confirmation</h5>
+      <div class="fs-5" aria-label="Close" (click)="uploadresultmodal.dismiss()">
+        <i class="bi bi-x-circle"></i>
+      </div>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="file">Excel File</label>
+          <input id="file" type="file" class="form-control mt-2" placeholder="File" (change)="handleFileInput($event.target)">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary btn-sm"
+        (click)="uploadresultmodal.dismiss()">Cancel</button>
+      <button type="button" class="btn btn-outline-dark btn-sm" (click)="uploadresultmodal.close()">Submit</button>
+    </div>
+  </div>
+</ng-template>
 
 <!-- Delete Result Confirmation Modal -->
 <ng-template #deleteResultModal let-deleteresultmodal>

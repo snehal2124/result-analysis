@@ -16,14 +16,14 @@ export class AuthService {
   ) { }
 
   login(email: string, password: string): Observable<any> {
-    return this.httpService.post(`${ServiceUrls.RESULT_ANALYSIS_API}/${ServiceUrls.LOGIN_URI}`, {
+    return this.httpService.post(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.LOGIN_URI}`, {
       email,
       password
     });
   }
 
   register(email: string, password: string): Observable<any> {
-    return this.httpService.post(`${ServiceUrls.RESULT_ANALYSIS_API}/${ServiceUrls.SIGN_IN_URI}`, {
+    return this.httpService.post(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.SIGN_IN_URI}`, {
       email,
       password
     });

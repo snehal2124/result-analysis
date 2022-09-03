@@ -15,7 +15,7 @@ export class StudentComponent implements OnInit {
   studentForm: FormGroup = this.formBuilder.group({});
 
   page = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   actionType: string = '';
 
@@ -40,7 +40,7 @@ export class StudentComponent implements OnInit {
 
   getStudents() {
     this.studentService.getStudents().subscribe((val) => {
-      this.students = val;
+      this.students = val?.map((result: any, inddex: number) => ({ ...result, index: inddex + 1 }));
     });
   }
 
@@ -98,4 +98,3 @@ export class StudentComponent implements OnInit {
 }
 
 
- 

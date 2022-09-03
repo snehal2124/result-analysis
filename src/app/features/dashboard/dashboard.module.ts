@@ -4,7 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { NgbModule, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     RouterModule,
     NgbModule,
-    // NgbPagination
+    NgChartsModule
   ]
 })
 export class DashboardModule { }

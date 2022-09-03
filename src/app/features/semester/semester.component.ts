@@ -20,7 +20,7 @@ export class SemesterComponent implements OnInit {
   semesterForm: FormGroup = this.formBuilder.group({});
 
   page = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   actionType: string = '';
 
@@ -50,7 +50,7 @@ export class SemesterComponent implements OnInit {
 
   getSemesters() {
     this.semesterService.getSemesters().subscribe((val) => {
-      this.semesters = val;
+      this.semesters = val?.map((result: any, inddex: number) => ({ ...result, index: inddex + 1 }));
     });
   }
 

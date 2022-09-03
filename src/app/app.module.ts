@@ -22,6 +22,7 @@ import { ResultModule } from './features/result/result.module';
 import { authInterceptorProviders } from './core/interceptor/auth.interceptor';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 import { DashboardModule } from './features/dashboard/dashboard.module';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
     SpecializationModule,
     SubjectsModule,
     ResultModule,
-    DashboardModule
+    DashboardModule,
+    NgChartsModule
   ],
   providers: [HttpService, authInterceptorProviders],
   bootstrap: [AppComponent]

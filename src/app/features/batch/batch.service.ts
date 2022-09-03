@@ -10,8 +10,8 @@ export class BatchService {
 
   constructor(private httpService: HttpService) { }
 
-  getBatches() {
-    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.BATCHES_URI}`);
+  getBatches(filterParams = '') {
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.BATCHES_URI}${filterParams}`);
   }
 
   getBatch() {

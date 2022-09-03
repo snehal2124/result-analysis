@@ -12,8 +12,8 @@ export class ResultService {
 
   constructor(private httpService: HttpService) { }
 
-  getResults() {
-    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.RESULTS_URI}`);
+  getResults(filterParams = '') {
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.RESULTS_URI}${filterParams}`);
   }
 
   getResult() {
@@ -22,6 +22,10 @@ export class ResultService {
 
   createResult(formData: Object) {
     return this.httpService.post(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.RESULTS_URI}`, formData);
+  }
+
+  uploadResults(formData: Object) {
+    return this.httpService.post(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.RESULTS_URI}-bluk`, formData);
   }
 
   updateResult(formData: any) {
@@ -35,7 +39,7 @@ export class ResultService {
   }
 }
 
-  
+
 
 
 

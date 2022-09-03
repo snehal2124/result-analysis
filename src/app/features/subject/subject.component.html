@@ -6,7 +6,7 @@
   </div>
   <div class="mt-4 d-flex flex-row justify-content-center">
     <div class="d-flex flex-column align-items-center w-100" *ngIf="subjects.length">
-      <table class="table" >
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -22,8 +22,8 @@
             <tr>
               <th scope="row">{{Subject.index}}</th>
               <td>{{Subject.name}}</td>
-              <td>{{Subject.semesterid}}</td>
-              <td>{{Subject.totalmarks}}</td>
+              <td>{{Subject.semester_id}}</td>
+              <td>{{Subject.total_marks}}</td>
               <td>{{Subject.code}}</td>
               <td class="d-flex flex-row">
                 <i class="bi bi-pencil-fill" (click)="openEditSubjectModal(Subject, subjectModal)"></i>
@@ -60,26 +60,27 @@
             aria-describedby="basic-addon1" formControlName="name">
         </div>
         <div class="d-flex flex-row justify-content-between">
-      
+
           <div class="form-group mt-2">
             <label for="totalmarks">Total marks</label>
-            <input type="text" class="form-control" id="totalmarks" placeholder="totalmarks" formControlName="total_marks">
+            <input type="text" class="form-control" id="totalmarks" placeholder="Total Marks"
+              formControlName="total_marks">
           </div>
-        </div>
-        <div class="form-group mt-2">
-          <label for="subjectCode">Code</label>
-          <input type="text" class="form-control" id="subjectCode" placeholder="code" formControlName="code">
+          <div class="form-group mt-2">
+            <label for="subjectCode">Code</label>
+            <input type="text" class="form-control" id="subjectCode" placeholder="Code" formControlName="code">
+          </div>
         </div>
         <div class="form-group mt-2">
           <label for="semester">Semester</label>
           <select class="form-select mt-2" placeholder="Select Semester" formControlName="semester_id">
-            <option *ngFor="let semester of semesters"[value]="semester.id">{{semester.name}}     
+            <option *ngFor="let semester of semesters" [value]="semester.id">{{semester.name}}
             </option>
           </select>
         </div>
       </form>
     </div>
-   
+
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-secondary btn-sm" (click)="subjectmodal.dismiss()">Cancel</button>
       <button type="button" class="btn btn-outline-dark btn-sm"

@@ -35,14 +35,17 @@ export class SideBarComponent implements OnInit {
         route: "batches"
       },
       {
+        name: "Semester",
+        route: "semester"
+      },
+      {
         name: "Subjects",
         route: "subjects"
       },
       {
-        name: "Semester",
-        route: "semester"
+        name: "Results",
+        route: "results"
       },
-
       {
         name: "Staff",
         route: "staff"
@@ -50,10 +53,6 @@ export class SideBarComponent implements OnInit {
       {
         name: "Students",
         route: "students"
-      },
-      {
-        name: "Results",
-        route: "results"
       }
     ],
     staff: [
