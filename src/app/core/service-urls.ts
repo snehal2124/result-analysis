@@ -7,6 +7,8 @@ export namespace ServiceUrls {
   export const SEMESTERS_URI = '/semesters';
   export const STUDENTS_URI = '/students';
   export const RESULTS_URI = '/results';
+  export const RESULTS_BATCH_URI = '/result-batch';
+  export const RESULTS_SUBJECT_URI = '/result-subject';
   export const STAFF_URI = '/staff';
   export const USERS_URI = '/users';
 

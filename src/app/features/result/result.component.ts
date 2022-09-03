@@ -110,8 +110,16 @@ export class ResultComponent implements OnInit {
 
   openEditResultModal(result: any, content: any) {
     this.actionType = 'edit';
-    const { id, specialization_id, student_id, batch_id, semester_id, marks_obtained } = result;
-    this.resultForm.setValue({ id, specialization_id: specialization_id.id, student_id: student_id._id, batch_id: batch_id.id, semester_id: semester_id.id, marks_obtained });
+    const { id, specialization_id, student_id, batch_id, semester_id, subject_id, marks_obtained } = result;
+    this.resultForm.setValue({
+      id,
+      specialization_id: specialization_id.id,
+      student_id: student_id.id,
+      batch_id: batch_id.id,
+      semester_id: semester_id.id,
+      subject_id: subject_id.id,
+      marks_obtained
+    });
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       console.log(`Closed with: ${result}`);
     }, (reason) => {

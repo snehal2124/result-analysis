@@ -16,6 +16,16 @@ export class ResultService {
     return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.RESULTS_URI}${filterParams}`);
   }
 
+  getResultsByBatch(filters = {}) {
+    const filterParams = new URLSearchParams(filters).toString();
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.RESULTS_BATCH_URI}?${filterParams}`);
+  }
+
+  getResultsBySubject(filters = {}) {
+    const filterParams = new URLSearchParams(filters).toString();
+    return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.RESULTS_SUBJECT_URI}?${filterParams}`);
+  }
+
   getResult() {
     return this.httpService.get(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.RESULTS_URI}`);
   }
@@ -38,7 +48,6 @@ export class ResultService {
     return this.httpService.delete(`${ServiceUrls.RESULT_ANALYSIS_API}${ServiceUrls.RESULTS_URI}/${resultId}`, {});
   }
 }
-
 
 
 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ChartConfiguration } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 import { BatchService } from '../batch/batch.service';
 import { ResultService } from '../result/result.service';
 import { SemesterService } from '../semester/semester.service';
@@ -13,6 +14,8 @@ import { SubjectService } from '../subject/subject.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  @ViewChildren(BaseChartDirective) charts!: QueryList<BaseChartDirective>;
+
   results: any[] = [];
   specializations: any[] = [];
   batches: any[] = [];
@@ -26,12 +29,14 @@ export class DashboardComponent implements OnInit {
   public barChartLegend = true;
   public barChartPlugins = [];
 
-  public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
-    datasets: [
-      { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-      { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-    ]
+  public batchChartData: ChartConfiguration<'bar'>['data'] = {
+    labels: [],
+    datasets: [{ data: [], label: 'Average Marks' }]
+  };
+
+  public subjectChartData: ChartConfiguration<'bar'>['data'] = {
+    labels: [],
+    datasets: [{ data: [], label: 'Average Marks' }]
   };
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
@@ -48,34 +53,73 @@ export class DashboardComponent implements OnInit {
     responsive: false,
     // maintainAspectRatio: false
   };
-  specialization = new FormControl('all');
-  batch = new FormControl('all');
-  semester = new FormControl('all');
-  subject = new FormControl('all');
+
+  filterForm: FormGroup = this.formBuilder.group({});
 
   constructor(
+    private formBuilder: FormBuilder,
     private resultService: ResultService,
     private specializationService: SpecializationService,
     private batchService: BatchService,
     private semesterService: SemesterService,
     private subjectService: SubjectService,
-  ) { }
+  ) {
+    this.filterForm = this.formBuilder.group({
+      specialization: new FormControl(),
+      batch: new FormControl('all'),
+      semester: new FormControl('all'),
+      subject: new FormControl('all'),
+    });
+
+    this.filterForm.valueChanges.subscribe((value) => {
+      this.getResultsByBatch(value);
+      this.getResultsBySubject(value);
+    });
+  }
 
   ngOnInit(): void {
-    this.specialization?.valueChanges.subscribe((value) => {
-      this.getBatches();
-    });
-    this.batch.valueChanges.subscribe((value) => {
-      this.getSemesters();
-    });
-    this.semester.valueChanges.subscribe((value) => {
-      this.getSubjects();
-    });
+
+    // this.filterForm.get('specialization')?.valueChanges.subscribe((value) => {
+    //   this.getBatches(value);
+    //   this.filterForm.get('batch')?.setValue('all');
+    // });
+    // this.filterForm.get('batch')?.valueChanges.subscribe((value) => {
+    //   this.getSemesters(value);
+    //   this.filterForm.get('semester')?.setValue('all');
+    // });
+    // this.filterForm.get('semester')?.valueChanges.subscribe((value) => {
+    //   this.getSubjects(value);
+    //   this.filterForm.get('subject')?.setValue('all');
+    // });
     this.getResults();
     this.getSpecializations();
     this.getBatches();
     this.getSemesters();
     this.getSubjects();
+  }
+
+  getResultsByBatch(filter: any) {
+    this.resultService.getResultsByBatch(filter).subscribe((val) => {
+      this.batchChartData.labels = val.map((item: any) => item.batch_id__name);
+      const dataSetValue = val.map((item: any) => item.avg)
+      this.batchChartData.datasets = [{ data: dataSetValue, label: 'Average Marks' }];
+      this.updateCharts();
+    });
+  }
+
+  getResultsBySubject(filter: any) {
+    this.resultService.getResultsBySubject(filter).subscribe((val) => {
+      this.subjectChartData.labels = val.map((item: any) => item.subject_id__name);
+      const dataSetValue = val.map((item: any) => item.avg)
+      this.subjectChartData.datasets = [{ data: dataSetValue, label: 'Average Marks' }];
+      this.updateCharts();
+    });
+  }
+
+  updateCharts() {
+    this.charts.forEach((child) => {
+      child?.chart?.update()
+    });
   }
 
   getResults() {
@@ -87,30 +131,31 @@ export class DashboardComponent implements OnInit {
   getSpecializations() {
     this.specializationService.getSpecializations().subscribe((val) => {
       this.specializations = val;
+      this.filterForm.get('specialization')?.setValue(this.specializations[0]?.id)
     });
   }
-  getBatches(filter?: string) {
+  getBatches(filter?: any) {
     let filterParams = '';
-    if(filter){
-      filterParams = `?specializations=${filter}`
+    if (filter && filter !== 'all') {
+      filterParams = `?specialization=${filter}`
     }
     this.batchService.getBatches(filterParams).subscribe((val) => {
       this.batches = val;
     });
   }
-  getSemesters(filter?: string) {
+  getSemesters(filter?: any) {
     let filterParams = '';
-    if(filter){
+    if (filter && filter !== 'all') {
       filterParams = `?batch=${filter}`
     }
     this.semesterService.getSemesters(filterParams).subscribe((val) => {
       this.semesters = val;
     });
   }
-  getSubjects(filter?: string) {
+  getSubjects(filter?: any) {
     let filterParams = '';
-    if(filter){
-      filterParams = `?sepcializations=${filter}`
+    if (filter && filter !== 'all') {
+      filterParams = `?semester=${filter}`
     }
     this.subjectService.getSubjects(filterParams).subscribe((val) => {
       this.subjects = val;
